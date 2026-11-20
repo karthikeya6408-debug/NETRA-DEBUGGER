@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE COSMOS</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: #02030c;
+      color: white;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+    }
+
+    .nebula {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 42%, rgba(80, 35, 202, 0.22), transparent 28%),
+        radial-gradient(circle at 77% 20%, rgba(0, 161, 255, 0.15), transparent 24%),
+        radial-gradient(circle at 62% 78%, rgba(255, 58, 173, 0.12), transparent 26%),
+        radial-gradient(circle at 49% 52%, rgba(120, 69, 255, 0.08), transparent 48%);
+      filter: blur(18px);
+    }
+
+    nav {
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7vw;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.36em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #b9eaff;
+      box-shadow: 0 0 12px #8ce4ff, 0 0 30px #5f6cff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 34px;
+    }
+
+    nav a {
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #bcefff;
+      text-shadow: 0 0 12px #78dfff;
+    }
+
+    .hero {
+      min-height: calc(100vh - 95px);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 7vw 100px;
+    }
+
+    .planet {
+      position: absolute;
+      width: min(52vw, 710px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      top: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      background:
+        radial-gradient(circle at 34% 28%, #e5fbff 0%, #90d4ff 2%, #3c70da 10%, #142f86 28%, #07123e 50%, #020414 74%);
+      box-shadow:
+        0 0 35px rgba(96, 149, 255, 0.7),
+        0 0 120px rgba(84, 64, 255, 0.5),
+        0 0 280px rgba(68, 0, 255, 0.24),
+        inset -55px -40px 100px #000,
+        inset 35px 20px 70px rgba(160, 228, 255, 0.25);
+      animation: hoverPlanet 9s ease-in-out infinite;
+    }
+
+    .planet::before {
+      content: "";
+      position: absolute;
+      inset: -12%;
+      border-radius: 50%;
+      border: 1px solid rgba(177, 220, 255, 0.22);
+      transform: rotate(-18deg) scaleY(0.28);
+      box-shadow:
+        0 0 18px rgba(119, 210, 255, 0.45),
+        0 0 55px rgba(106, 127, 255, 0.25);
+    }
+
+    .planet::after {
+      content: "";
+      position: absolute;
+      inset: 6%;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 36% 36%, transparent 0 12%, rgba(172, 231, 255, 0.17) 13%, transparent 23%),
+        radial-gradient(ellipse at 67% 59%, rgba(87, 31, 156, 0.32), transparent 18%),
+        radial-gradient(ellipse at 41% 74%, rgba(16, 77, 165, 0.32), transparent 21%);
+      mix-blend-mode: screen;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      margin-top: 70px;
+    }
+
+    .orbit {
+      position: absolute;
+      width: min(93vw, 1300px);
+      height: min(25vw, 350px);
+      top: 49%;
+      border: 1px solid rgba(147, 190, 255, 0.2);
+      border-radius: 50%;
+      transform: rotate(-14deg);
+      z-index: -2;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(199, 163, 255, 0.1);
+    }
+
+    .orbit::before {
+      inset: -37% 12%;
+    }
+
+    .orbit::after {
+      inset: 27% -10%;
+      transform: rotate(23deg);
+    }
+
+    .eyebrow {
+      color: #b5eaff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: reveal 1s ease both;
+    }
+
+    h1 {
+      font-size: clamp(64px, 10.8vw, 175px);
+      line-height: 0.78;
+      font-weight: 700;
+      letter-spacing: -0.08em;
+      text-shadow: 0 0 80px rgba(105, 100, 255, 0.3);
+      animation: reveal 1.1s 0.1s ease both;
+    }
+
+    h1 span {
+      display: block;
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: -0.09em;
+      background: linear-gradient(110deg, #d2fbff, #9ba8ff 44%, #f0a7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 24px rgba(183, 121, 255, 0.45));
+    }
+
+    .description {
+      max-width: 560px;
+      margin: 37px auto 30px;
+      color: rgba(220, 234, 255, 0.72);
+      line-height: 1.9;
+      font-size: 13px;
+      animation: reveal 1.1s 0.25s ease both;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      animation: reveal 1.1s 0.4s ease both;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 16px 23px;
+      border-radius: 100px;
+      transition: 0.35s ease;
+    }
+
+    .primary {
+      color: #071024;
+      border: 0;
+      background: linear-gradient(120deg, #97f0ff, #a9a0ff 52%, #f3acff);
+      box-shadow: 0 10px 35px rgba(104, 109, 255, 0.4);
+    }
+
+    .primary:hover {
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 18px 50px rgba(125, 106, 255, 0.7);
+    }
+
+    .secondary {
+      color: #d8ecff;
+      background: rgba(34, 55, 104, 0.2);
+      border: 1px solid rgba(177, 213, 255, 0.35);
+      backdrop-filter: blur(10px);
+    }
+
+    .secondary:hover {
+      border-color: #a7e9ff;
+      background: rgba(63, 87, 159, 0.3);
+      box-shadow: 0 0 25px rgba(113, 209, 255, 0.2);
+    }
+
+    .side-data {
+      position: absolute;
+      left: 7vw;
+      bottom: 35px;
+      color: rgba(185, 218, 255, 0.55);
+      font-size: 9px;
+      line-height: 2;
+      letter-spacing: 0.18em;
+      text-align: left;
+    }
+
+    .scroll {
+      position: absolute;
+      right: 7vw;
+      bottom: 36px;
+      color: rgba(200, 227, 255, 0.62);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      writing-mode: vertical-rl;
+    }
+
+    .scroll::after {
+      content: "";
+      width: 1px;
+      height: 45px;
+      display: block;
+      margin: 10px auto 0;
+      background: linear-gradient(#b6eeff, transparent);
+    }
+
+    .discover {
+      position: relative;
+      min-height: 100vh;
+      padding: 130px 8vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .discover h2 {
+      font-size: clamp(40px, 6vw, 88px);
+      max-width: 800px;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 65px;
+    }
+
+    .discover h2 em {
+      color: #bc9cff;
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 270px;
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid rgba(157, 198, 255, 0.16);
+      background: linear-gradient(145deg, rgba(50, 65, 140, 0.2), rgba(11, 14, 39, 0.5));
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+      transition: 0.45s;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(166, 216, 255, 0.55);
+      box-shadow: 0 20px 55px rgba(56, 44, 181, 0.25);
+    }
+
+    .card-number {
+      color: #86e9ff;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+    }
+
+    .card h3 {
+      font-size: 25px;
+      margin-top: 95px;
+      letter-spacing: -0.05em;
+    }
+
+    .card p {
+      color: rgba(210, 225, 255, 0.62);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+
+    .card-glow {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -45px;
+      top: -45px;
+      border-radius: 50%;
+      background: #8263ff;
+      filter: blur(40px);
+      opacity: 0.35;
+    }
+
+    .card:nth-child(2) .card-glow {
+      background: #00cfff;
+    }
+
+    .card:nth-child(3) .card-glow {
+      background: #f265d6;
+    }
+
+    @keyframes hoverPlanet {
+      50% {
+        transform: translateX(-50%) translateY(18px) rotate(1deg);
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      nav ul {
+        display: none;
+      }
+
+      .planet {
+        width: 82vw;
+        top: 8%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .side-data {
+        font-size: 7px;
+      }
+
+      .scroll {
+        display: none;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="universe"></canvas>
+  <div class="nebula"></div>
+
+  <nav>
+    <div class="logo">
+      <span class="logo-dot"></span>
+      THE COSMOS
+    </div>
+
+    <ul>
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#discover">DISCOVER</a></li>
+      <li><a href="#beyond">BEYOND</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="orbit"></div>
+    <div class="planet"></div>
+
+    <div class="hero-content">
+      <p class="eyebrow">You are standing inside infinity</p>
+
+      <h1>
+        THE<br>
+        <span>UNIVERSE</span>
+      </h1>
+
+      <p class="description">
+        We are not separate from the cosmos. Every breath, every atom,
+        every dream was born from ancient stars collapsing into light.
+      </p>
+
+      <div class="buttons">
+        <button class="primary" onclick="travel()">Begin Your Voyage ✦</button>
+        <button class="secondary" onclick="document.querySelector('#discover').scrollIntoView()">Explore the unknown</button>
+      </div>
+    </div>
+
+    <div class="side-data">
+      LOCATION: MILKY WAY GALAXY<br>
+      SECTOR: ORION ARM<br>
+      TIME: 13.8 BILLION YEARS
+    </div>
+
+    <div class="scroll">SCROLL TO DESCEND</div>
+  </section>
+
+  <section class="discover" id="discover">
+    <p class="eyebrow">The architecture of existence</p>
+
+    <h2>
+      Somewhere between
+      <em>nothing</em> and everything,
+      we became conscious.
+    </h2>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card-glow"></div>
+        <div class="card-number">01 / STARS</div>
+        <h3>Born from fire</h3>
+        <p>Stellar furnaces create the elements that become oceans, mountains, and you.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-glow"></div>
+        <div class="card-number">02 / GALAXIES</div>
+        <h3>Islands of light</h3>
+        <p>Billions of galaxies drift through the dark, each carrying countless worlds.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-glow"></div>
+        <div class="card-number">03 / INFINITY</div>
+        <h3>The great unknown</h3>
+        <p>The observable universe is only the beginning of a mystery without edges.</p>
+      </article>
+    </div>
+  </section>
+
+  <script>
+    const canvas = document.getElementById("universe");
+    const ctx = canvas.getContext("2d");
+
+    let stars = [];
+    let meteors = [];
+    let w, h;
+
+    function setup() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+
+      stars = Array.from({ length: Math.floor(w / 3) }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        size: Math.random() * 1.8 + 0.15,
+        opacity: Math.random(),
+        speed: Math.random() * 0.012 + 0.002,
+        hue: Math.random() > 0.85 ? 240 + Math.random() * 50 : 190 + Math.random() * 45
+      }));
+
+      meteors = Array.from({ length: 4 }, () => createMeteor());
+    }
+
+    function createMeteor() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h * 0.5,
+        length: Math.random() * 90 + 40,
+        speed: Math.random() * 7 + 4,
+        opacity: 0,
+        active: false,
+        timer: Math.random() * 500
+      };
+    }
+
+    function drawStar(star, time) {
+      const glow = 0.35 + Math.sin(time * star.speed + star.opacity * 15) * 0.35;
+
+      ctx.beginPath();
+      ctx.fillStyle = `hsla(${star.hue}, 100%, 88%, ${glow})`;
+      ctx.shadowBlur = star.size * 6;
+      ctx.shadowColor = `hsl(${star.hue}, 100%, 70%)`;
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawMeteor(meteor) {
+      if (!meteor.active) {
+        meteor.timer--;
+
+        if (meteor.timer <= 0) {
+          meteor.active = true;
+          meteor.opacity = 1;
+          meteor.x = Math.random() * w;
+          meteor.y = Math.random() * h * 0.45;
+        }
+
+        return;
+      }
+
+      const gradient = ctx.createLinearGradient(
+        meteor.x,
+        meteor.y,
+        meteor.x - meteor.length,
+        meteor.y - meteor.length * 0.35
+      );
+
+      gradient.addColorStop(0, `rgba(220, 247, 255, ${meteor.opacity})`);
+      gradient.addColorStop(1, "rgba(120, 150, 255, 0)");
+
+      ctx.beginPath();
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 1.5;
+      ctx.moveTo(meteor.x, meteor.y);
+      ctx.lineTo(meteor.x - meteor.length, meteor.y - meteor.length * 0.35);
+      ctx.stroke();
+
+      meteor.x += meteor.speed;
+      meteor.y += meteor.speed * 0.38;
+      meteor.opacity -= 0.012;
+
+      if (meteor.opacity <= 0 || meteor.x > w + 150 || meteor.y > h + 150) {
+        Object.assign(meteor, createMeteor());
+      }
+    }
+
+    function animate(time = 0) {
+      ctx.clearRect(0, 0, w, h);
+
+      stars.forEach(star => drawStar(star, time));
+      meteors.forEach(drawMeteor);
+
+      ctx.shadowBlur = 0;
+      requestAnimationFrame(animate);
+    }
+
+    function travel() {
+      document.querySelector(".primary").innerHTML = "Warp Drive Activated ✦";
+
+      stars.forEach(star => {
+        star.x = w / 2 + (star.x - w / 2) * 2.3;
+        star.y = h / 2 + (star.y - h / 2) * 2.3;
+        star.size *= 1.7;
+      });
+
+      setTimeout(() => {
+        document.querySelector(".primary").innerHTML = "Begin Your Voyage ✦";
+        setup();
+      }, 1200);
+    }
+
+    window.addEventListener("resize", setup);
+
+    setup();
+    animate();
+  </script>
+</body>
+</html>

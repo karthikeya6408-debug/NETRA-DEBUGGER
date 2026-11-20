@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="COSMOS - an interactive journey through space: the Solar System, space missions, cosmic wonders and a space quiz.">
+<title>COSMOS | Journey Through Space</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+ 
+<style>
+/* ============================================================
+   COSMOS - Space website
+   Sections: base, nav, hero, stats, solar system, weight,
+   timeline, moon counter, wonders, quiz, subscribe, footer
+   ============================================================ */
+ 
+:root{
+  --bg:#03030a;
+  --text:#e8eaff;
+  --muted:#9aa0c7;
+  --accent:#7c5cff;
+  --accent2:#00e5ff;
+  --card:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.10);
+  --radius:18px;
+  --display:'Orbitron','Segoe UI',system-ui,sans-serif;
+}
+ 
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1100px 600px at 85% -10%,rgba(124,92,255,.22),transparent 60%),
+    radial-gradient(900px 600px at -5% 45%,rgba(0,229,255,.09),transparent 60%),
+    radial-gradient(900px 600px at 100% 90%,rgba(255,60,160,.08),transparent 60%);
+}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+ 
+img,svg{max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
+ 
+.container{max-width:1180px;margin:0 auto}
+section{padding:110px 24px 50px;scroll-margin-top:60px}
+ 
+.eyebrow{
+  font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent2);font-weight:600;margin-bottom:10px;
+}
+h2{
+  font-family:var(--display);
+  font-size:clamp(1.7rem,4vw,2.7rem);
+  line-height:1.15;margin-bottom:14px;font-weight:700;
+}
+.lead{color:var(--muted);max-width:640px;font-size:1.05rem}
+.section-head{margin-bottom:46px}
+.section-head.center{text-align:center}
+.section-head.center .lead{margin:0 auto}
+ 
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  padding:26px;
+}
+ 
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:999px;
+  font-weight:600;font-size:.95rem;cursor:pointer;
+  border:1px solid transparent;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),#4f8bff 60%,var(--accent2));
+  color:#fff;box-shadow:0 8px 30px rgba(124,92,255,.35);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(124,92,255,.5)}
+.btn-ghost{background:rgba(255,255,255,.05);border-color:var(--border)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px)}
+ 
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:none}
+ 
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+ 
+/* progress bar */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:200;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+ 
+/* ---------------- NAV ---------------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:150;
+  padding:16px 24px;transition:background .3s ease,padding .3s ease,border-color .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(3,3,10,.78);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--border);padding:11px 24px;
+}
+.nav-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{
+  font-family:var(--display);font-weight:900;letter-spacing:.22em;font-size:1.15rem;
+  display:flex;align-items:center;gap:10px;
+}
+.logo-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#fff,var(--accent2) 45%,var(--accent));
+  box-shadow:0 0 14px var(--accent2);
+}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{
+  font-size:.9rem;color:var(--muted);font-weight:500;position:relative;padding:4px 0;
+  transition:color .25s ease;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;
+  background:var(--accent2);transition:width .3s ease;
+}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.menu-btn{
+  display:none;background:none;border:1px solid var(--border);border-radius:10px;
+  width:44px;height:44px;cursor:pointer;font-size:1.3rem;
+}
+ 
+/* ---------------- HERO ---------------- */
+.hero{
+  min-height:100vh;padding-top:120px;padding-bottom:80px;
+  display:flex;align-items:center;position:relative;
+}
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:50px;align-items:center;
+}
+.badge{
+  display:inline-block;padding:7px 16px;border-radius:999px;font-size:.8rem;
+  border:1px solid var(--border);background:rgba(255,255,255,.05);
+  color:var(--accent2);letter-spacing:.12em;margin-bottom:22px;
+}
+.hero h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(2.6rem,7.5vw,5.6rem);line-height:1.02;letter-spacing:.04em;margin-bottom:22px;
+  background:linear-gradient(120deg,#fff 10%,#b9a8ff 45%,var(--accent2) 95%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.hero p{color:var(--muted);font-size:1.15rem;max-width:520px;margin-bottom:34px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px}
+ 
+.hero-visual{
+  --hv:min(430px,78vw);
+  position:relative;width:var(--hv);height:var(--hv);margin:0 auto;
+  animation:float 9s ease-in-out infinite;
+}
+.hero-planet{
+  position:absolute;inset:0;border-radius:50%;
+  background:
+    radial-gradient(ellipse 28% 18% at 30% 32%,rgba(70,200,120,.85),transparent 72%),
+    radial-gradient(ellipse 18% 26% at 62% 58%,rgba(70,200,120,.8),transparent 72%),
+    radial-gradient(ellipse 14% 10% at 72% 26%,rgba(240,240,255,.55),transparent 70%),
+    radial-gradient(ellipse 16% 8% at 38% 70%,rgba(240,240,255,.4),transparent 70%),
+    radial-gradient(circle at 30% 28%,#7fd8ff 0%,#2d78ff 38%,#0a1c66 72%,#02030f 100%);
+  box-shadow:
+    inset -60px -40px 90px rgba(0,0,0,.8),
+    0 0 90px rgba(70,130,255,.42);
+}
+.hero-planet::after{
+  content:"";position:absolute;inset:-2%;border-radius:50%;
+  box-shadow:0 0 38px 6px rgba(120,190,255,.35);
+  animation:pulse 6s ease-in-out infinite;
+}
+.hv-orbit{
+  position:absolute;inset:-14%;border-radius:50%;
+  border:1px dashed rgba(255,255,255,.22);
+  animation:spin 26s linear infinite;
+}
+.hv-moon{
+  position:absolute;top:0;left:50%;width:8%;aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle at 30% 30%,#fff,#9a9a9a 70%);
+  box-shadow:0 0 14px rgba(255,255,255,.5);
+}
+.scroll-hint{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  color:var(--muted);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;
+}
+.scroll-hint span{display:block;font-size:1.3rem;animation:bounce 1.8s ease-in-out infinite}
+ 
+/* ---------------- STATS ---------------- */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat{text-align:center;padding:30px 16px}
+.stat-num{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(1.7rem,3.4vw,2.5rem);
+  background:linear-gradient(120deg,#fff,var(--accent2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.stat-label{color:var(--muted);font-size:.92rem;margin-top:6px}
+ 
+/* ---------------- SOLAR SYSTEM ---------------- */
+.solar-grid{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  gap:40px;align-items:center;
+}
+.system-wrap{container-type:inline-size;width:100%;max-width:660px;margin:0 auto}
+.system{position:relative;width:100%;aspect-ratio:1/1}
+.sun{
+  position:absolute;left:50%;top:50%;width:9%;aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,#fff6c4,#ffb938 45%,#ff7a00 82%);
+  box-shadow:0 0 40px 10px rgba(255,160,40,.6),0 0 120px 40px rgba(255,120,0,.28);
+}
+.orbit{
+  position:absolute;border-radius:50%;pointer-events:none;
+  border:1px dashed rgba(255,255,255,.13);
+  animation:spin linear infinite;
+}
+.system.paused .orbit{animation-play-state:paused}
+.planet{
+  position:absolute;top:0;left:50%;
+  width:max(12px,calc(var(--p) * 100cqw));aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  border:0;cursor:pointer;pointer-events:auto;
+  background:radial-gradient(circle at 30% 30%,var(--c1),var(--c2));
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.planet:hover{transform:translate(-50%,-50%) scale(1.3)}
+.planet.active{box-shadow:0 0 0 2px #fff,0 0 20px 5px var(--c1)}
+.planet.ring::after{
+  content:"";position:absolute;left:50%;top:50%;width:230%;height:64%;
+  border:max(1.5px,.35cqw) solid rgba(240,220,170,.65);border-radius:50%;
+  transform:translate(-50%,-50%) rotate(-18deg);pointer-events:none;
+}
+.sys-controls{display:flex;justify-content:center;gap:12px;margin-top:18px}
+.mini-btn{
+  padding:9px 18px;border-radius:999px;border:1px solid var(--border);
+  background:rgba(255,255,255,.05);cursor:pointer;font-size:.85rem;
+  transition:background .25s ease;
+}
+.mini-btn:hover{background:rgba(255,255,255,.14)}
+ 
+.info h3{font-family:var(--display);font-size:1.7rem;margin-bottom:10px}
+.info .desc{color:var(--muted);margin-bottom:20px}
+.info-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.info-stat{
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:12px;padding:12px 14px;
+}
+.info-stat small{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.info-stat strong{font-size:.98rem;font-weight:600}
+.fact{
+  border-left:3px solid var(--accent2);padding:10px 14px;
+  background:rgba(0,229,255,.06);border-radius:0 12px 12px 0;font-size:.95rem;
+}
+.fact b{color:var(--accent2)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;justify-content:center}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;border:1px solid var(--border);
+  background:rgba(255,255,255,.04);cursor:pointer;font-size:.88rem;
+  transition:background .25s ease,border-color .25s ease;
+}
+.chip:hover{background:rgba(255,255,255,.12)}
+.chip.active{border-color:var(--accent2);background:rgba(0,229,255,.12)}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;background:radial-gradient(circle at 30% 30%,var(--c1),var(--c2))}
+ 
+/* ---------------- WEIGHT ---------------- */
+.weight-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:30px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:8px}
+.field input,.field select{
+  width:100%;padding:14px 16px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  color:var(--text);font-size:1rem;
+}
+.field select option{background:#0d0d22;color:#fff}
+.result{
+  margin-top:24px;padding:20px;border-radius:14px;text-align:center;
+  background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(0,229,255,.12));
+  border:1px solid var(--border);
+}
+.result .big{
+  font-family:var(--display);font-size:2.4rem;font-weight:700;display:block;margin:4px 0;
+}
+.result small{color:var(--muted)}
+.bar-row{display:grid;grid-template-columns:78px 1fr 70px;gap:12px;align-items:center;margin-bottom:12px;font-size:.9rem}
+.bar-track{height:10px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar-fill{
+  height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width .6s cubic-bezier(.2,.8,.2,1);
+}
+.bar-val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+ 
+/* ---------------- TIMELINE ---------------- */
+.timeline{position:relative;max-width:920px;margin:0 auto}
+.timeline::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+  background:linear-gradient(var(--accent),var(--accent2),transparent);
+}
+.t-item{position:relative;width:50%;padding:0 42px 42px 0;text-align:right}
+.t-item:nth-child(even){margin-left:50%;padding:0 0 42px 42px;text-align:left}
+.t-item::after{
+  content:"";position:absolute;top:10px;right:-8px;width:16px;height:16px;border-radius:50%;
+  background:var(--accent2);box-shadow:0 0 0 5px rgba(0,229,255,.18),0 0 18px var(--accent2);
+}
+.t-item:nth-child(even)::after{right:auto;left:-8px}
+.t-year{font-family:var(--display);color:var(--accent2);font-weight:700;font-size:1.3rem}
+.t-title{font-weight:600;font-size:1.1rem;margin:2px 0 6px}
+.t-text{color:var(--muted);font-size:.95rem}
+ 
+/* ---------------- MOON COUNTER ---------------- */
+.moon-card{
+  text-align:center;padding:50px 24px;
+  background:
+    radial-gradient(500px 220px at 50% 0%,rgba(255,255,255,.08),transparent 70%),
+    var(--card);
+}
+.counter{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:30px 0 14px}
+.c-box{
+  min-width:110px;padding:18px 14px;border-radius:14px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+}
+.c-box b{
+  display:block;font-family:var(--display);font-size:clamp(1.5rem,4vw,2.3rem);
+  font-variant-numeric:tabular-nums;
+}
+.c-box span{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+ 
+/* ---------------- WONDERS ---------------- */
+.wonders{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.wonder{padding:0;overflow:hidden;transition:transform .35s ease,border-color .35s ease}
+.wonder:hover{transform:translateY(-8px);border-color:rgba(0,229,255,.5)}
+.wonder-body{padding:20px}
+.wonder h3{font-family:var(--display);font-size:1.05rem;margin-bottom:8px}
+.wonder p{color:var(--muted);font-size:.9rem}
+.art{height:190px;position:relative;overflow:hidden;background:radial-gradient(circle,#0b0b1e,#03030a)}
+.art-bh::before{
+  content:"";position:absolute;left:50%;top:50%;width:160px;height:50px;
+  transform:translate(-50%,-50%) rotate(-12deg);border-radius:50%;
+  background:radial-gradient(ellipse,transparent 36%,#ffb347 52%,#ff6a00 66%,transparent 76%);
+  filter:blur(1.5px);
+}
+.art-bh::after{
+  content:"";position:absolute;left:50%;top:50%;width:64px;height:64px;border-radius:50%;
+  transform:translate(-50%,-50%);background:#000;
+  box-shadow:0 0 26px 6px rgba(255,140,40,.45);
+}
+.art-nebula{
+  background:
+    radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 78% 22%,#fff,transparent),
+    radial-gradient(1px 1px at 60% 80%,#fff,transparent),
+    radial-gradient(1px 1px at 35% 72%,#fff,transparent),
+    radial-gradient(circle at 25% 40%,rgba(255,60,160,.65),transparent 45%),
+    radial-gradient(circle at 72% 35%,rgba(0,200,255,.55),transparent 48%),
+    radial-gradient(circle at 55% 78%,rgba(140,80,255,.6),transparent 50%),
+    #05040f;
+}
+.art-galaxy::before{
+  content:"";position:absolute;left:50%;top:50%;width:172px;height:172px;margin:-86px 0 0 -86px;
+  border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,rgba(170,150,255,.7) 0 8deg,rgba(255,200,150,.12) 8deg 24deg);
+  -webkit-mask:radial-gradient(circle,#000 8%,transparent 68%);
+  mask:radial-gradient(circle,#000 8%,transparent 68%);
+  animation:spin 40s linear infinite;
+}
+.art-galaxy::after{
+  content:"";position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-17px 0 0 -17px;
+  border-radius:50%;background:radial-gradient(circle,#fff6c4,rgba(255,180,80,.5) 50%,transparent 72%);
+}
+.art-pulsar::before{
+  content:"";position:absolute;left:50%;top:50%;width:210px;height:210px;margin:-105px 0 0 -105px;
+  background:conic-gradient(from 0deg,transparent 0 84deg,rgba(0,229,255,.85) 90deg,transparent 96deg 264deg,rgba(0,229,255,.85) 270deg,transparent 276deg 360deg);
+  -webkit-mask:radial-gradient(circle,#000 0,transparent 70%);
+  mask:radial-gradient(circle,#000 0,transparent 70%);
+  animation:spin 3s linear infinite;
+}
+.art-pulsar::after{
+  content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;
+  border-radius:50%;background:#fff;box-shadow:0 0 18px 6px rgba(0,229,255,.8);
+}
+ 
+/* ---------------- QUIZ ---------------- */
+.quiz-card{max-width:760px;margin:0 auto}
+.q-top{display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem;margin-bottom:10px}
+.q-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:26px}
+.q-bar div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s ease}
+.q-text{font-size:1.25rem;font-weight:600;margin-bottom:22px;min-height:3.2rem}
+.options{display:grid;gap:12px}
+.option{
+  text-align:left;padding:15px 18px;border-radius:12px;cursor:pointer;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:1rem;
+  transition:background .25s ease,border-color .25s ease,transform .2s ease;
+}
+.option:hover:not(:disabled){background:rgba(255,255,255,.12);transform:translateX(4px)}
+.option:disabled{cursor:default}
+.option.correct{background:rgba(40,200,120,.2);border-color:#28c878}
+.option.wrong{background:rgba(255,80,100,.2);border-color:#ff5064}
+.q-feedback{margin-top:20px;min-height:3rem;color:var(--muted)}
+.q-actions{margin-top:10px}
+ 
+/* ---------------- SUBSCRIBE ---------------- */
+.cta{
+  text-align:center;padding:60px 24px;
+  background:
+    radial-gradient(600px 260px at 50% 0%,rgba(124,92,255,.35),transparent 70%),
+    var(--card);
+}
+.sub-form{display:flex;gap:12px;max-width:520px;margin:28px auto 0;flex-wrap:wrap;justify-content:center}
+.sub-form input{
+  flex:1 1 240px;padding:14px 20px;border-radius:999px;font-size:1rem;
+  background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--text);
+}
+.form-msg{margin-top:16px;min-height:1.5rem;font-size:.92rem}
+.form-msg.ok{color:#5be3a0}
+.form-msg.err{color:#ff7a8a}
+ 
+/* ---------------- FOOTER ---------------- */
+footer{
+  margin-top:80px;padding:40px 24px;border-top:1px solid var(--border);
+  text-align:center;color:var(--muted);font-size:.88rem;
+}
+footer .logo{justify-content:center;margin-bottom:12px;color:var(--text)}
+.foot-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.foot-links a:hover{color:#fff}
+ 
+#toTop{
+  position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--border);background:rgba(10,10,30,.85);cursor:pointer;font-size:1.2rem;
+  opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:120;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{transform:translateY(-4px)}
+ 
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:1000px){
+  .solar-grid,.weight-grid{grid-template-columns:minmax(0,1fr)}
+  .wonders{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  .menu-btn{display:block}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+    background:rgba(3,3,10,.97);border-bottom:1px solid var(--border);padding:8px 24px 16px;
+  }
+  .nav.open .nav-links{display:flex}
+  .nav.open{background:rgba(3,3,10,.97)}
+  .nav-links a{display:block;padding:14px 0;font-size:1rem}
+  .hero-grid{grid-template-columns:minmax(0,1fr);text-align:center}
+  .hero p{margin-left:auto;margin-right:auto}
+  .hero-cta{justify-content:center}
+  .hero-visual{order:-1;--hv:min(260px,62vw)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  .timeline::before{left:14px}
+  .t-item,.t-item:nth-child(even){width:100%;margin-left:0;padding:0 0 36px 46px;text-align:left}
+  .t-item::after,.t-item:nth-child(even)::after{left:6px;right:auto}
+}
+@media (max-width:560px){
+  section{padding:90px 18px 40px}
+  .wonders{grid-template-columns:minmax(0,1fr)}
+  .stats-grid{gap:12px}
+  .bar-row{grid-template-columns:70px 1fr 62px;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+ 
+<body>
+<div id="progress"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+ 
+<!-- ============== NAV ============== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo"><span class="logo-dot"></span>COSMOS</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#solar">Solar System</a></li>
+      <li><a href="#weight">Your Weight</a></li>
+      <li><a href="#timeline">Missions</a></li>
+      <li><a href="#wonders">Wonders</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+  </div>
+</header>
+ 
+<main>
+<!-- ============== HERO ============== -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">&#10022; A JOURNEY THROUGH SPACE</span>
+      <h1>COSMOS</h1>
+      <p>Explore the planets, relive the greatest space missions, and discover the strangest objects in the Universe. Everything you see here is made to be touched, clicked, and explored.</p>
+      <div class="hero-cta">
+        <a href="#solar" class="btn btn-primary">Explore the Solar System &#8594;</a>
+        <a href="#quiz" class="btn btn-ghost">Test your knowledge</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-planet"></div>
+      <div class="hv-orbit"><div class="hv-moon"></div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll<span>&#8595;</span></div>
+</section>
+ 
+<!-- ============== STATS ============== -->
+<section id="facts" style="padding-top:30px">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="card stat reveal">
+        <div class="stat-num"><span class="count" data-target="8">0</span></div>
+        <div class="stat-label">planets orbit our Sun</div>
+      </div>
+      <div class="card stat reveal">
+        <div class="stat-num"><span class="count" data-target="13.8" data-decimals="1">0</span> B</div>
+        <div class="stat-label">years: the age of the Universe</div>
+      </div>
+      <div class="card stat reveal">
+        <div class="stat-num"><span class="count" data-target="299792">0</span></div>
+        <div class="stat-label">km per second: the speed of light</div>
+      </div>
+      <div class="card stat reveal">
+        <div class="stat-num"><span class="count" data-target="99.8" data-decimals="1">0</span>%</div>
+        <div class="stat-label">of the Solar System's mass is the Sun</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============== SOLAR SYSTEM ============== -->
+<section id="solar">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Cosmic Neighbourhood</div>
+      <h2>The Solar System</h2>
+      <p class="lead">Click any planet to learn about it. Sizes and orbit speeds are exaggerated so everything fits on screen, in reality the distances are vast.</p>
+    </div>
+ 
+    <div class="solar-grid">
+      <div class="reveal">
+        <div class="system-wrap">
+          <div class="system" id="system">
+            <div class="sun" title="The Sun"></div>
+          </div>
+        </div>
+        <div class="sys-controls">
+          <button class="mini-btn" id="pauseBtn" type="button">&#10074;&#10074; Pause orbits</button>
+        </div>
+      </div>
+ 
+      <div class="card info reveal" id="info" aria-live="polite">
+        <h3 id="pName">Earth</h3>
+        <p class="desc" id="pDesc"></p>
+        <div class="info-stats" id="pStats"></div>
+        <div class="fact"><b>Did you know?</b> <span id="pFact"></span></div>
+      </div>
+    </div>
+ 
+    <div class="chips" id="chips"></div>
+  </div>
+</section>
+ 
+<!-- ============== WEIGHT ============== -->
+<section id="weight">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Interactive</div>
+      <h2>How Much Would You Weigh?</h2>
+      <p class="lead">Your mass never changes, but gravity does. Type your weight and pick a world.</p>
+    </div>
+ 
+    <div class="weight-grid">
+      <div class="card reveal">
+        <div class="field">
+          <label for="wInput">Your weight on Earth (kg)</label>
+          <input type="number" id="wInput" value="60" min="1" max="500" step="1" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="wBody">Choose a world</label>
+          <select id="wBody"></select>
+        </div>
+        <div class="result">
+          <small id="wLabel">On Mars you would weigh</small>
+          <span class="big" id="wResult">0 kg</span>
+          <small>This is what a bathroom scale calibrated on Earth would read.</small>
+        </div>
+      </div>
+      <div class="card reveal" id="bars"></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============== TIMELINE ============== -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">History</div>
+      <h2>Milestones of Space Exploration</h2>
+      <p class="lead">From a beeping metal sphere to telescopes that look back to the first galaxies.</p>
+    </div>
+    <div class="timeline" id="tl"></div>
+  </div>
+</section>
+ 
+<!-- ============== MOON COUNTER ============== -->
+<section id="moon" style="padding-top:30px">
+  <div class="container">
+    <div class="card moon-card reveal">
+      <div class="eyebrow">One Small Step</div>
+      <h2>Time Since Humans First Walked on the Moon</h2>
+      <p class="lead" style="margin:0 auto">Counted from Neil Armstrong's first step on the lunar surface, 21 July 1969 at 02:56 UTC.</p>
+      <div class="counter">
+        <div class="c-box"><b id="mDays">0</b><span>Days</span></div>
+        <div class="c-box"><b id="mHours">0</b><span>Hours</span></div>
+        <div class="c-box"><b id="mMins">0</b><span>Minutes</span></div>
+        <div class="c-box"><b id="mSecs">0</b><span>Seconds</span></div>
+      </div>
+      <p class="lead" style="margin:0 auto" id="mYears"></p>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============== WONDERS ============== -->
+<section id="wonders">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Beyond the Solar System</div>
+      <h2>Cosmic Wonders</h2>
+      <p class="lead">Illustrations drawn with pure CSS, inspired by some of the most extreme objects known.</p>
+    </div>
+    <div class="wonders">
+      <article class="card wonder reveal">
+        <div class="art art-bh" role="img" aria-label="Illustration of a black hole"></div>
+        <div class="wonder-body">
+          <h3>Black Holes</h3>
+          <p>Regions where gravity is so strong that not even light escapes. The first image of one, in the galaxy M87, was released in April 2019.</p>
+        </div>
+      </article>
+      <article class="card wonder reveal">
+        <div class="art art-nebula" role="img" aria-label="Illustration of a colourful nebula"></div>
+        <div class="wonder-body">
+          <h3>Nebulae</h3>
+          <p>Giant clouds of gas and dust where new stars are born. The Pillars of Creation sit about 6,500 light-years away in the Eagle Nebula.</p>
+        </div>
+      </article>
+      <article class="card wonder reveal">
+        <div class="art art-galaxy" role="img" aria-label="Illustration of a spiral galaxy"></div>
+        <div class="wonder-body">
+          <h3>Galaxies</h3>
+          <p>Islands of billions of stars. The Andromeda Galaxy is about 2.5 million light-years away and is heading toward our Milky Way.</p>
+        </div>
+      </article>
+      <article class="card wonder reveal">
+        <div class="art art-pulsar" role="img" aria-label="Illustration of a pulsar with rotating beams"></div>
+        <div class="wonder-body">
+          <h3>Pulsars</h3>
+          <p>Fast-spinning neutron stars that sweep beams of radiation across space. A teaspoon of their material would weigh billions of tons.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============== QUIZ ============== -->
+<section id="quiz">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Challenge</div>
+      <h2>Space Quiz</h2>
+      <p class="lead">Eight questions. How high can you score?</p>
+    </div>
+    <div class="card quiz-card reveal">
+      <div class="q-top"><span id="qMeta">Question 1 of 8</span><span id="qScore">Score: 0</span></div>
+      <div class="q-bar"><div id="qBar"></div></div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="q-feedback" id="qFeedback" aria-live="polite"></div>
+      <div class="q-actions">
+        <button class="btn btn-primary" id="qNext" type="button" hidden>Next question</button>
+        <button class="btn btn-primary" id="qRestart" type="button" hidden>Play again</button>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============== SUBSCRIBE ============== -->
+<section id="subscribe">
+  <div class="container">
+    <div class="card cta reveal">
+      <div class="eyebrow">Stay Curious</div>
+      <h2>Join the Mission Log</h2>
+      <p class="lead" style="margin:0 auto">Get a short weekly note about launches, discoveries and night-sky events.</p>
+      <form class="sub-form" id="subForm" novalidate>
+        <input type="email" id="subEmail" placeholder="you@example.com" aria-label="Email address" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <div class="form-msg" id="subMsg" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+</main>
+ 
+<footer>
+  <div class="logo"><span class="logo-dot"></span>COSMOS</div>
+  <div class="foot-links">
+    <a href="#solar">Solar System</a>
+    <a href="#timeline">Missions</a>
+    <a href="#wonders">Wonders</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+  <p>&copy; <span id="year"></span> COSMOS. Built with HTML, CSS and JavaScript. Look up tonight!</p>
+</footer>
+ 
+<button id="toTop" aria-label="Back to top" type="button">&#8593;</button>
+ 
+<script>
+(function () {
+  'use strict';
+ 
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ 
+  /* ------------------------------------------------------------
+     1. STARFIELD (canvas)
+  ------------------------------------------------------------ */
+  var canvas = document.getElementById('stars');
+  var ctx = canvas.getContext('2d');
+  var W = 0, H = 0, stars = [], shooters = [];
+ 
+  function resizeStars() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var count = Math.min(420, Math.floor((W * H) / 6000));
+    stars = [];
+    for (var i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.3 + 0.25,
+        z: Math.random() * 0.8 + 0.2,
+        t: Math.random() * Math.PI * 2,
+        s: Math.random() * 0.02 + 0.005
+      });
+    }
+  }
+ 
+  function drawStars() {
+    ctx.clearRect(0, 0, W, H);
+    var sy = window.scrollY || window.pageYOffset || 0;
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var y = (((s.y - sy * s.z * 0.15) % H) + H) % H;
+      var a = 0.35 + 0.65 * Math.abs(Math.sin(s.t));
+      if (!reduceMotion) s.t += s.s;
+      ctx.fillStyle = 'rgba(255,255,255,' + a.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (!reduceMotion) {
+      if (Math.random() < 0.004 && shooters.length < 2) {
+        shooters.push({
+          x: Math.random() * W * 0.8,
+          y: Math.random() * H * 0.4,
+          vx: 9 + Math.random() * 5,
+          vy: 4 + Math.random() * 3,
+          life: 0
+        });
+      }
+      for (var j = shooters.length - 1; j >= 0; j--) {
+        var m = shooters[j];
+        m.x += m.vx;
+        m.y += m.vy;
+        m.life++;
+        var grad = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 7, m.y - m.vy * 7);
+        grad.addColorStop(0, 'rgba(255,255,255,0.9)');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(m.x - m.vx * 7, m.y - m.vy * 7);
+        ctx.stroke();
+        if (m.life > 55 || m.x > W + 100 || m.y > H + 100) shooters.splice(j, 1);
+      }
+      requestAnimationFrame(drawStars);
+    }
+  }
+ 
+  resizeStars();
+  drawStars();
+  window.addEventListener('resize', function () {
+    resizeStars();
+    if (reduceMotion) drawStars();
+  });
+  if (reduceMotion) {
+    window.addEventListener('scroll', drawStars, { passive: true });
+  }
+ 
+  /* ------------------------------------------------------------
+     2. NAV, SCROLL PROGRESS, BACK TO TOP, MOBILE MENU
+  ------------------------------------------------------------ */
+  var nav = document.getElementById('nav');
+  var progress = document.getElementById('progress');
+  var toTop = document.getElementById('toTop');
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+ 
+  function onScroll() {
+    var y = window.scrollY || window.pageYOffset || 0;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    nav.classList.toggle('scrolled', y > 20);
+    toTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+ 
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+ 
+  menuBtn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+ 
+  document.getElementById('year').textContent = new Date().getFullYear();
+ 
+  /* ------------------------------------------------------------
+     3. REVEAL ON SCROLL + COUNT-UP NUMBERS
+  ------------------------------------------------------------ */
+  function formatNumber(value, decimals) {
+    return value.toLocaleString('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+ 
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute('data-target'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    if (reduceMotion) {
+      el.textContent = formatNumber(target, decimals);
+      return;
+    }
+    var duration = 1800;
+    var start = performance.now();
+    function step(now) {
+      var t = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = formatNumber(target * eased, decimals);
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+ 
+  var revealEls = document.querySelectorAll('.reveal');
+  var countEls = document.querySelectorAll('.count');
+ 
+  if ('IntersectionObserver' in window) {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { revealObs.observe(el); });
+ 
+    var countObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    countEls.forEach(function (el) { countObs.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+    countEls.forEach(animateCount);
+  }
+ 
+  /* ------------------------------------------------------------
+     4. SOLAR SYSTEM
+  ------------------------------------------------------------ */
+  var planets = [
+    {
+      name: 'Mercury', c1: '#d6d6d6', c2: '#6e6e6e', p: 0.016, r: 9, dur: 6,
+      desc: 'The smallest planet and the closest to the Sun. With almost no atmosphere to hold in heat, its surface swings from scorching days to freezing nights.',
+      stats: [['Diameter', '4,879 km'], ['Distance from Sun', '57.9 million km'], ['Year length', '88 Earth days'], ['Moons', '0'], ['Gravity', '3.7 m/s\u00B2'], ['Temperature', '\u2212180 to 430 \u00B0C']],
+      fact: 'A day on Mercury (sunrise to sunrise) lasts about 176 Earth days, twice as long as its year.'
+    },
+    {
+      name: 'Venus', c1: '#ffe3a8', c2: '#c98a2e', p: 0.026, r: 14, dur: 10,
+      desc: 'Earth\'s toxic twin. A thick carbon dioxide atmosphere traps heat and makes Venus the hottest planet, with crushing surface pressure.',
+      stats: [['Diameter', '12,104 km'], ['Distance from Sun', '108.2 million km'], ['Year length', '225 Earth days'], ['Moons', '0'], ['Gravity', '8.87 m/s\u00B2'], ['Temperature', '464 \u00B0C (average)']],
+      fact: 'Venus spins backwards compared with most planets, so the Sun rises in the west.'
+    },
+    {
+      name: 'Earth', c1: '#8bd6ff', c2: '#1f5fbf', p: 0.028, r: 19, dur: 14,
+      desc: 'Our home. The only place in the Universe known to host life, with liquid water oceans and a protective atmosphere and magnetic field.',
+      stats: [['Diameter', '12,742 km'], ['Distance from Sun', '149.6 million km'], ['Year length', '365.25 days'], ['Moons', '1'], ['Gravity', '9.81 m/s\u00B2'], ['Temperature', '15 \u00B0C (average)']],
+      fact: 'About 71% of Earth\'s surface is covered by water.'
+    },
+    {
+      name: 'Mars', c1: '#ffa07a', c2: '#a8321b', p: 0.022, r: 24, dur: 20,
+      desc: 'The Red Planet. Iron oxide dust gives it its colour, and robots on its surface are searching for signs of ancient life.',
+      stats: [['Diameter', '6,779 km'], ['Distance from Sun', '227.9 million km'], ['Year length', '687 Earth days'], ['Moons', '2 (Phobos, Deimos)'], ['Gravity', '3.71 m/s\u00B2'], ['Temperature', '\u221265 \u00B0C (average)']],
+      fact: 'Olympus Mons on Mars is the tallest known volcano in the Solar System, about 22 km high, roughly two and a half times the height of Mount Everest.'
+    },
+    {
+      name: 'Jupiter', c1: '#f4d9ad', c2: '#b5703c', p: 0.06, r: 30, dur: 34,
+      desc: 'The king of the planets. A gas giant more massive than all the other planets combined, wrapped in colourful storm bands.',
+      stats: [['Diameter', '139,820 km'], ['Distance from Sun', '778.5 million km'], ['Year length', '11.9 Earth years'], ['Moons', '95+'], ['Gravity', '24.79 m/s\u00B2'], ['Cloud-top temp.', '\u2212110 \u00B0C']],
+      fact: 'The Great Red Spot is a giant storm wider than Earth that has been observed for well over a century.'
+    },
+    {
+      name: 'Saturn', c1: '#f7e6b4', c2: '#b99b5a', p: 0.05, r: 36.5, dur: 48, ring: true,
+      desc: 'Famous for its spectacular rings made of countless pieces of ice and rock. Another gas giant, light and fast-spinning.',
+      stats: [['Diameter', '116,460 km'], ['Distance from Sun', '1.43 billion km'], ['Year length', '29.4 Earth years'], ['Moons', '270+'], ['Gravity', '10.44 m/s\u00B2'], ['Cloud-top temp.', '\u2212140 \u00B0C']],
+      fact: 'Saturn is the least dense planet. It is lighter than water, so it would float in a big enough bathtub.'
+    },
+    {
+      name: 'Uranus', c1: '#c4f6f8', c2: '#4fb3c4', p: 0.036, r: 42, dur: 70,
+      desc: 'An ice giant that rotates on its side. Methane in its atmosphere gives it a pale blue-green colour.',
+      stats: [['Diameter', '50,724 km'], ['Distance from Sun', '2.87 billion km'], ['Year length', '84 Earth years'], ['Moons', '28+'], ['Gravity', '8.69 m/s\u00B2'], ['Cloud-top temp.', '\u2212195 \u00B0C']],
+      fact: 'Uranus is tilted about 98\u00B0, so it rolls around the Sun almost on its side.'
+    },
+    {
+      name: 'Neptune', c1: '#97b8ff', c2: '#2a45c9', p: 0.036, r: 47.5, dur: 90,
+      desc: 'The farthest planet from the Sun. A dark, cold and windy ice giant that was found through mathematical prediction before it was seen.',
+      stats: [['Diameter', '49,244 km'], ['Distance from Sun', '4.5 billion km'], ['Year length', '164.8 Earth years'], ['Moons', '16'], ['Gravity', '11.15 m/s\u00B2'], ['Cloud-top temp.', '\u2212200 \u00B0C']],
+      fact: 'Neptune has the fastest winds in the Solar System, measured at more than 2,000 km/h.'
+    }
+  ];
+ 
+  var system = document.getElementById('system');
+  var chipsBox = document.getElementById('chips');
+  var pName = document.getElementById('pName');
+  var pDesc = document.getElementById('pDesc');
+  var pStats = document.getElementById('pStats');
+  var pFact = document.getElementById('pFact');
+  var planetEls = [];
+  var chipEls = [];
+ 
+  planets.forEach(function (pl, i) {
+    // orbit
+    var orbit = document.createElement('div');
+    orbit.className = 'orbit';
+    orbit.style.width = (pl.r * 2) + '%';
+    orbit.style.height = (pl.r * 2) + '%';
+    orbit.style.left = (50 - pl.r) + '%';
+    orbit.style.top = (50 - pl.r) + '%';
+    orbit.style.animationDuration = pl.dur + 's';
+    orbit.style.animationDelay = '-' + (Math.random() * pl.dur).toFixed(2) + 's';
+ 
+    // planet button
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'planet' + (pl.ring ? ' ring' : '');
+    btn.style.setProperty('--p', pl.p);
+    btn.style.setProperty('--c1', pl.c1);
+    btn.style.setProperty('--c2', pl.c2);
+    btn.setAttribute('aria-label', 'Select ' + pl.name);
+    btn.setAttribute('title', pl.name);
+    btn.addEventListener('click', function () { selectPlanet(i); });
+    orbit.appendChild(btn);
+    system.appendChild(orbit);
+    planetEls.push(btn);
+ 
+    // chip
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip';
+    chip.style.setProperty('--c1', pl.c1);
+    chip.style.setProperty('--c2', pl.c2);
+    var dot = document.createElement('i');
+    chip.appendChild(dot);
+    chip.appendChild(document.createTextNode(pl.name));
+    chip.addEventListener('click', function () { selectPlanet(i); });
+    chipsBox.appendChild(chip);
+    chipEls.push(chip);
+  });
+ 
+  function selectPlanet(i) {
+    var pl = planets[i];
+    pName.textContent = pl.name;
+    pDesc.textContent = pl.desc;
+    pFact.textContent = pl.fact;
+    pStats.innerHTML = '';
+    pl.stats.forEach(function (row) {
+      var box = document.createElement('div');
+      box.className = 'info-stat';
+      var label = document.createElement('small');
+      label.textContent = row[0];
+      var value = document.createElement('strong');
+      value.textContent = row[1];
+      box.appendChild(label);
+      box.appendChild(value);
+      pStats.appendChild(box);
+    });
+    planetEls.forEach(function (el, idx) { el.classList.toggle('active', idx === i); });
+    chipEls.forEach(function (el, idx) { el.classList.toggle('active', idx === i); });
+  }
+  selectPlanet(2); // start with Earth
+ 
+  var pauseBtn = document.getElementById('pauseBtn');
+  pauseBtn.addEventListener('click', function () {
+    var paused = system.classList.toggle('paused');
+    pauseBtn.innerHTML = paused ? '&#9654; Resume orbits' : '&#10074;&#10074; Pause orbits';
+  });
+ 
+  /* ------------------------------------------------------------
+     5. WEIGHT CALCULATOR
+  ------------------------------------------------------------ */
+  var EARTH_G = 9.81;
+  var bodies = [
+    { name: 'Moon', g: 1.62 },
+    { name: 'Mercury', g: 3.7 },
+    { name: 'Venus', g: 8.87 },
+    { name: 'Earth', g: 9.81 },
+    { name: 'Mars', g: 3.71 },
+    { name: 'Jupiter', g: 24.79 },
+    { name: 'Saturn', g: 10.44 },
+    { name: 'Uranus', g: 8.69 },
+    { name: 'Neptune', g: 11.15 },
+    { name: 'Sun', g: 274 }
+  ];
+ 
+  var wInput = document.getElementById('wInput');
+  var wBody = document.getElementById('wBody');
+  var wLabel = document.getElementById('wLabel');
+  var wResult = document.getElementById('wResult');
+  var barsBox = document.getElementById('bars');
+  var barRows = [];
+ 
+  bodies.forEach(function (b, i) {
+    var opt = document.createElement('option');
+    opt.value = String(i);
+    opt.textContent = b.name;
+    if (b.name === 'Mars') opt.selected = true;
+    wBody.appendChild(opt);
+  });
+ 
+  var barsTitle = document.createElement('h3');
+  barsTitle.style.cssText = 'font-family:var(--display);font-size:1.1rem;margin-bottom:18px';
+  barsTitle.textContent = 'Your weight across the Solar System';
+  barsBox.appendChild(barsTitle);
+ 
+  bodies.forEach(function (b) {
+    if (b.name === 'Sun') return; // the Sun would dwarf every other bar
+    var row = document.createElement('div');
+    row.className = 'bar-row';
+    var name = document.createElement('span');
+    name.textContent = b.name;
+    var track = document.createElement('div');
+    track.className = 'bar-track';
+    var fill = document.createElement('div');
+    fill.className = 'bar-fill';
+    track.appendChild(fill);
+    var val = document.createElement('span');
+    val.className = 'bar-val';
+    row.appendChild(name);
+    row.appendChild(track);
+    row.appendChild(val);
+    barsBox.appendChild(row);
+    barRows.push({ body: b, fill: fill, val: val });
+  });
+ 
+  function updateWeight() {
+    var w = parseFloat(wInput.value);
+    var body = bodies[parseInt(wBody.value, 10)];
+    if (!(w > 0) || !isFinite(w)) {
+      wLabel.textContent = 'Enter a weight above to begin';
+      wResult.textContent = '\u2014';
+      barRows.forEach(function (r) { r.fill.style.width = '0%'; r.val.textContent = '\u2014'; });
+      return;
+    }
+    var result = w * body.g / EARTH_G;
+    wLabel.textContent = 'On ' + (body.name === 'Moon' || body.name === 'Sun' ? 'the ' : '') + body.name + ' you would weigh';
+    wResult.textContent = formatNumber(result, 1) + ' kg';
+    var max = 0;
+    barRows.forEach(function (r) { max = Math.max(max, w * r.body.g / EARTH_G); });
+    barRows.forEach(function (r) {
+      var v = w * r.body.g / EARTH_G;
+      r.fill.style.width = (v / max * 100).toFixed(1) + '%';
+      r.val.textContent = formatNumber(v, 1) + ' kg';
+    });
+  }
+  wInput.addEventListener('input', updateWeight);
+  wBody.addEventListener('change', updateWeight);
+  updateWeight();
+ 
+  /* ------------------------------------------------------------
+     6. TIMELINE
+  ------------------------------------------------------------ */
+  var missions = [
+    ['1957', 'Sputnik 1', 'On 4 October 1957 the Soviet Union launched the first artificial satellite, starting the Space Age.'],
+    ['1961', 'Yuri Gagarin', 'On 12 April 1961 Gagarin became the first human in space, completing one orbit of Earth in about 108 minutes.'],
+    ['1969', 'Apollo 11', 'Neil Armstrong and Buzz Aldrin landed on the Moon on 20 July while Michael Collins orbited above.'],
+    ['1977', 'Voyager 1 and 2', 'Twin probes launched to tour the outer planets. Voyager 1 entered interstellar space in 2012.'],
+    ['1990', 'Hubble Space Telescope', 'Launched in April 1990, Hubble has sent back images that reshaped our view of the Universe.'],
+    ['1998', 'International Space Station', 'The first module launched in 1998. People have lived aboard continuously since November 2000.'],
+    ['2012', 'Curiosity on Mars', 'NASA\'s car-sized rover touched down in August 2012 using a daring "sky crane" landing.'],
+    ['2021', 'Perseverance and Ingenuity', 'A new Mars rover landed in February 2021 and its helicopter made the first powered flight on another planet.'],
+    ['2022', 'James Webb Space Telescope', 'Launched on 25 December 2021, Webb revealed its first full-colour images in July 2022, peering at distant early galaxies.'],
+    ['2023', 'Chandrayaan-3 and Aditya-L1', 'India soft-landed near the Moon\'s south pole on 23 August 2023 and launched its first solar observatory in September.']
+  ];
+ 
+  var tl = document.getElementById('tl');
+  missions.forEach(function (m) {
+    var item = document.createElement('div');
+    item.className = 't-item reveal';
+    var y = document.createElement('div');
+    y.className = 't-year';
+    y.textContent = m[0];
+    var t = document.createElement('div');
+    t.className = 't-title';
+    t.textContent = m[1];
+    var p = document.createElement('p');
+    p.className = 't-text';
+    p.textContent = m[2];
+    item.appendChild(y);
+    item.appendChild(t);
+    item.appendChild(p);
+    tl.appendChild(item);
+    if ('IntersectionObserver' in window) {
+      revealObs.observe(item);
+    } else {
+      item.classList.add('visible');
+    }
+  });
+ 
+  /* ------------------------------------------------------------
+     7. MOON COUNTER
+  ------------------------------------------------------------ */
+  var firstStep = Date.UTC(1969, 6, 21, 2, 56, 15); // 21 July 1969, 02:56:15 UTC
+  var mDays = document.getElementById('mDays');
+  var mHours = document.getElementById('mHours');
+  var mMins = document.getElementById('mMins');
+  var mSecs = document.getElementById('mSecs');
+  var mYears = document.getElementById('mYears');
+ 
+  function tickMoon() {
+    var total = Math.floor((Date.now() - firstStep) / 1000);
+    if (total < 0) total = 0;
+    var days = Math.floor(total / 86400);
+    var hours = Math.floor((total % 86400) / 3600);
+    var mins = Math.floor((total % 3600) / 60);
+    var secs = total % 60;
+    mDays.textContent = formatNumber(days, 0);
+    mHours.textContent = String(hours).padStart(2, '0');
+    mMins.textContent = String(mins).padStart(2, '0');
+    mSecs.textContent = String(secs).padStart(2, '0');
+    mYears.textContent = 'That is about ' + Math.floor(days / 365.25) + ' years ago.';
+  }
+  tickMoon();
+  setInterval(tickMoon, 1000);
+ 
+  /* ------------------------------------------------------------
+     8. QUIZ
+  ------------------------------------------------------------ */
+  var quiz = [
+    { q: 'Which planet is the largest in our Solar System?', o: ['Saturn', 'Jupiter', 'Neptune', 'Earth'], a: 1, e: 'Jupiter is about 11 times wider than Earth.' },
+    { q: 'Which planet has the hottest surface?', o: ['Mercury', 'Venus', 'Mars', 'Jupiter'], a: 1, e: 'Venus\'s thick carbon dioxide atmosphere traps heat, keeping the surface near 464 \u00B0C, hotter even than Mercury.' },
+    { q: 'Roughly how long does sunlight take to reach Earth?', o: ['8 seconds', '8 minutes', '8 hours', '8 days'], a: 1, e: 'Sunlight takes about 8 minutes and 20 seconds to travel the 150 million km to us.' },
+    { q: 'Who was the first human to travel into space?', o: ['Neil Armstrong', 'Buzz Aldrin', 'Yuri Gagarin', 'Alan Shepard'], a: 2, e: 'Yuri Gagarin orbited Earth on 12 April 1961 aboard Vostok 1.' },
+    { q: 'What is the name of the galaxy that contains our Solar System?', o: ['Andromeda', 'Triangulum', 'Whirlpool', 'Milky Way'], a: 3, e: 'We live in a spiral arm of the Milky Way, which holds hundreds of billions of stars.' },
+    { q: 'Which planet is most famous for its spectacular rings?', o: ['Mars', 'Saturn', 'Venus', 'Mercury'], a: 1, e: 'Saturn\'s bright rings are made mostly of water ice. The other giant planets have fainter rings too.' },
+    { q: 'Chandrayaan-3 landed near the south pole of which world?', o: ['Mars', 'The Moon', 'Venus', 'Mercury'], a: 1, e: 'On 23 August 2023 India became the fourth country to soft-land on the Moon.' },
+    { q: 'What force keeps the planets in orbit around the Sun?', o: ['Magnetism', 'Friction', 'Gravity', 'Solar wind'], a: 2, e: 'The Sun\'s gravity constantly pulls the planets inward, bending their paths into orbits.' }
+  ];
+ 
+  var qIndex = 0, qScoreVal = 0, answered = false;
+  var qMeta = document.getElementById('qMeta');
+  var qScoreEl = document.getElementById('qScore');
+  var qBar = document.getElementById('qBar');
+  var qText = document.getElementById('qText');
+  var qOptions = document.getElementById('qOptions');
+  var qFeedback = document.getElementById('qFeedback');
+  var qNext = document.getElementById('qNext');
+  var qRestart = document.getElementById('qRestart');
+ 
+  function rankFor(score) {
+    var ratio = score / quiz.length;
+    if (ratio >= 0.9) return 'Mission Commander';
+    if (ratio >= 0.65) return 'Astronaut';
+    if (ratio >= 0.4) return 'Space Cadet';
+    return 'Curious Stargazer';
+  }
+ 
+  function renderQuestion() {
+    if (qIndex >= quiz.length) {
+      qMeta.textContent = 'Finished';
+      qBar.style.width = '100%';
+      qText.textContent = 'Mission complete!';
+      qOptions.innerHTML = '';
+      qFeedback.textContent = 'You scored ' + qScoreVal + ' out of ' + quiz.length + '. Your rank: ' + rankFor(qScoreVal) + '.';
+      qNext.hidden = true;
+      qRestart.hidden = false;
+      return;
+    }
+    var item = quiz[qIndex];
+    answered = false;
+    qMeta.textContent = 'Question ' + (qIndex + 1) + ' of ' + quiz.length;
+    qScoreEl.textContent = 'Score: ' + qScoreVal;
+    qBar.style.width = (qIndex / quiz.length * 100) + '%';
+    qText.textContent = item.q;
+    qOptions.innerHTML = '';
+    qFeedback.textContent = '';
+    qNext.hidden = true;
+    qRestart.hidden = true;
+    item.o.forEach(function (text, idx) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'option';
+      b.textContent = text;
+      b.addEventListener('click', function () { choose(idx, b); });
+      qOptions.appendChild(b);
+    });
+  }
+ 
+  function choose(idx, btn) {
+    if (answered) return;
+    answered = true;
+    var item = quiz[qIndex];
+    var buttons = qOptions.children;
+    for (var i = 0; i < buttons.length; i++) buttons[i].disabled = true;
+    buttons[item.a].classList.add('correct');
+    if (idx === item.a) {
+      qScoreVal++;
+      qFeedback.textContent = 'Correct! ' + item.e;
+    } else {
+      btn.classList.add('wrong');
+      qFeedback.textContent = 'Not quite. ' + item.e;
+    }
+    qScoreEl.textContent = 'Score: ' + qScoreVal;
+    qNext.textContent = (qIndex === quiz.length - 1) ? 'See results' : 'Next question';
+    qNext.hidden = false;
+  }
+ 
+  qNext.addEventListener('click', function () { qIndex++; renderQuestion(); });
+  qRestart.addEventListener('click', function () { qIndex = 0; qScoreVal = 0; renderQuestion(); });
+  renderQuestion();
+ 
+  /* ------------------------------------------------------------
+     9. SUBSCRIBE FORM (demo only, nothing is sent anywhere)
+  ------------------------------------------------------------ */
+  var subForm = document.getElementById('subForm');
+  var subEmail = document.getElementById('subEmail');
+  var subMsg = document.getElementById('subMsg');
+ 
+  subForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var value = subEmail.value.trim();
+    if (!value || !subEmail.checkValidity()) {
+      subMsg.className = 'form-msg err';
+      subMsg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    subMsg.className = 'form-msg ok';
+    subMsg.textContent = 'Welcome aboard, ' + value + '! (This is a demo form, nothing was actually sent.)';
+    subForm.reset();
+  });
+})();
+</script>
+</body>
+</html>

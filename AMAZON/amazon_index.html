@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ShopEasy - a demo online shopping homepage built with HTML, CSS and JavaScript.">
+  <title>ShopEasy: Online Shopping Site in India</title>
+  <link rel="stylesheet" href="/AMAZON/amazon_style.css">
+</head>
+<body>
+
+  <!-- ========== TOP NAVBAR ========== -->
+  <header class="navbar" id="navbar">
+    <a href="#" class="logo" aria-label="ShopEasy home">shop<span>easy</span>.in</a>
+
+    <div class="nav-item location">
+      <small>Delivering to your city</small>
+      <strong>Update location</strong>
+    </div>
+
+    <form class="search" id="searchForm" role="search">
+      <select id="searchCategory" aria-label="Search category">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+      </select>
+      <input type="search" id="searchInput" placeholder="Search ShopEasy" aria-label="Search ShopEasy">
+      <button type="submit" aria-label="Search">&#128269;</button>
+    </form>
+
+    <div class="nav-item lang"><strong>EN</strong></div>
+
+    <div class="nav-item account">
+      <small>Hello, guest</small>
+      <strong>Account &amp; Lists</strong>
+    </div>
+
+    <div class="nav-item returns">
+      <small>Returns</small>
+      <strong>&amp; Orders</strong>
+    </div>
+
+    <a href="#" class="nav-item cart" aria-label="Cart">
+      <span class="cart-icon">&#128722;</span>
+      <span class="cart-count" id="cartCount">0</span>
+      <strong>Cart</strong>
+    </a>
+  </header>
+
+  <!-- ========== SECONDARY NAV ========== -->
+  <nav class="subnav" aria-label="Categories">
+    <a href="#" class="all">&#9776; All</a>
+    <a href="#">Mobiles</a>
+    <a href="#">Today's Deals</a>
+    <a href="#">Coupons</a>
+    <a href="#">Electronics</a>
+    <a href="#">New Releases</a>
+    <a href="#">Bestsellers</a>
+    <a href="#">Fashion</a>
+    <a href="#">Computers</a>
+    <a href="#">Home &amp; Kitchen</a>
+    <a href="#">Sports &amp; Fitness</a>
+  </nav>
+
+  <main>
+
+    <!-- ========== HERO CAROUSEL ========== -->
+    <section class="hero" aria-label="Featured deals">
+      <div class="slides" id="slides">
+        <article class="slide slide--1">
+          <div class="slide-text">
+            <h2>Mega Savings Week</h2>
+            <p>Up to 60% off on top brands</p>
+            <a href="#" class="btn">Shop now</a>
+          </div>
+          <div class="slide-art" aria-hidden="true">&#128085;</div>
+        </article>
+
+        <article class="slide slide--2">
+          <div class="slide-text">
+            <h2>Upgrade Your Tech</h2>
+            <p>Laptops, phones and audio from &#8377;999</p>
+            <a href="#" class="btn">Explore deals</a>
+          </div>
+          <div class="slide-art" aria-hidden="true">&#128187;</div>
+        </article>
+
+        <article class="slide slide--3">
+          <div class="slide-text">
+            <h2>Kitchen Essentials</h2>
+            <p>Everyday items under &#8377;999</p>
+            <a href="#" class="btn">See offers</a>
+          </div>
+          <div class="slide-art" aria-hidden="true">&#127859;</div>
+        </article>
+      </div>
+
+      <button class="arrow prev" id="prevBtn" aria-label="Previous slide">&#10094;</button>
+      <button class="arrow next" id="nextBtn" aria-label="Next slide">&#10095;</button>
+      <div class="dots" id="dots" role="tablist" aria-label="Slide selector"></div>
+    </section>
+
+    <!-- ========== 4-UP CARD GRID ========== -->
+    <section class="cards" aria-label="Featured categories">
+
+      <article class="card">
+        <h3>Under &#8377;499 | Trendy sneakers</h3>
+        <div class="tiles">
+          <a href="#" class="tile"><span class="emoji">&#128095;</span><span>Casual</span></a>
+          <a href="#" class="tile"><span class="emoji">&#129406;</span><span>Running</span></a>
+          <a href="#" class="tile"><span class="emoji">&#128097;</span><span>Sandals</span></a>
+          <a href="#" class="tile"><span class="emoji">&#129510;</span><span>Socks</span></a>
+        </div>
+        <a href="#" class="card-link">See all offers</a>
+      </article>
+
+      <article class="card">
+        <h3>Up to 40% off | Laptops</h3>
+        <div class="tiles">
+          <a href="#" class="tile"><span class="emoji">&#128187;</span><span>Everyday</span></a>
+          <a href="#" class="tile"><span class="emoji">&#127918;</span><span>Gaming</span></a>
+          <a href="#" class="tile"><span class="emoji">&#128433;</span><span>Mice</span></a>
+          <a href="#" class="tile"><span class="emoji">&#9000;</span><span>Keyboards</span></a>
+        </div>
+        <a href="#" class="card-link">Shop laptops</a>
+      </article>
+
+      <article class="card">
+        <h3>Home &amp; kitchen essentials</h3>
+        <div class="tiles">
+          <a href="#" class="tile"><span class="emoji">&#127858;</span><span>Cookware</span></a>
+          <a href="#" class="tile"><span class="emoji">&#9749;</span><span>Drinkware</span></a>
+          <a href="#" class="tile"><span class="emoji">&#128161;</span><span>Lighting</span></a>
+          <a href="#" class="tile"><span class="emoji">&#129529;</span><span>Cleaning</span></a>
+        </div>
+        <a href="#" class="card-link">Explore more</a>
+      </article>
+
+      <article class="card sign-card">
+        <h3>Sign in for the best experience</h3>
+        <p>Personalised picks, faster checkout and order tracking.</p>
+        <a href="#" class="btn btn--full">Sign in securely</a>
+        <p class="small">New customer? <a href="#">Start here.</a></p>
+      </article>
+
+    </section>
+
+    <!-- ========== PRODUCT SHELVES (filled by script.js) ========== -->
+    <section class="shelf" aria-labelledby="shelf1-title">
+      <div class="shelf-head">
+        <h2 id="shelf1-title">Best sellers in Electronics</h2>
+        <a href="#">See all</a>
+      </div>
+      <div class="shelf-track" id="shelfElectronics"></div>
+    </section>
+
+    <section class="shelf" aria-labelledby="shelf2-title">
+      <div class="shelf-head">
+        <h2 id="shelf2-title">Trending in Fashion</h2>
+        <a href="#">See all</a>
+      </div>
+      <div class="shelf-track" id="shelfFashion"></div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <a href="#top" class="to-top" id="toTop">Back to top</a>
+
+    <div class="footer-cols">
+      <div>
+        <h4>Get to Know Us</h4>
+        <a href="#">About ShopEasy</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Releases</a>
+      </div>
+      <div>
+        <h4>Make Money with Us</h4>
+        <a href="#">Sell on ShopEasy</a>
+        <a href="#">Become an Affiliate</a>
+        <a href="#">Advertise Your Products</a>
+      </div>
+      <div>
+        <h4>Payment Products</h4>
+        <a href="#">Business Card</a>
+        <a href="#">Shop with Points</a>
+        <a href="#">Reload Your Balance</a>
+      </div>
+      <div>
+        <h4>Let Us Help You</h4>
+        <a href="#">Your Account</a>
+        <a href="#">Returns Centre</a>
+        <a href="#">Help</a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">&copy; 2026 ShopEasy. A student demo project for learning HTML, CSS and JavaScript. Not a real store.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

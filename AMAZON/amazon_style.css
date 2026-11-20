@@ -1,0 +1,442 @@
+/* =========================================================
+   ShopEasy: homepage styles
+   Layout tools used: Flexbox (rows), CSS Grid (card grid),
+   CSS variables, sticky positioning, media queries.
+   ========================================================= */
+
+/* ---------- 1. Design tokens (change colours in ONE place) ---------- */
+:root {
+  --navy: #131921;
+  --navy-2: #232f3e;
+  --orange: #febd69;
+  --orange-dark: #f3a847;
+  --bg: #e3e6e6;
+  --surface: #ffffff;
+  --text: #0f1111;
+  --muted: #565959;
+  --link: #007185;
+  --price: #b12704;
+  --radius: 8px;
+  --shadow: 0 2px 6px rgba(15, 17, 17, 0.15);
+}
+
+/* ---------- 2. Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* ---------- 3. Top navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--navy);
+  color: #fff;
+  padding: 8px 20px;
+  transition: box-shadow 0.2s;
+}
+
+.navbar.scrolled { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4); }
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.logo span { color: var(--orange); }
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.nav-item strong { font-size: 14px; }
+.nav-item small { color: #ccc; }
+
+.logo:hover,
+.nav-item:hover { border-color: #fff; }
+
+/* Search bar grows to fill all free space */
+.search {
+  flex: 1;
+  display: flex;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.search:focus-within { box-shadow: 0 0 0 3px #f90; }
+
+.search select {
+  background: #f3f3f3;
+  color: #555;
+  border: none;
+  border-right: 1px solid #cdcdcd;
+  padding: 0 8px;
+}
+.search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 12px;
+  font-size: 15px;
+}
+.search button {
+  width: 48px;
+  border: none;
+  background: var(--orange);
+  font-size: 18px;
+}
+.search button:hover { background: var(--orange-dark); }
+
+.cart {
+  position: relative;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 6px;
+}
+.cart-icon { font-size: 26px; line-height: 1; }
+.cart-count {
+  position: absolute;
+  top: -2px;
+  left: 20px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--orange);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 18px;
+}
+.cart-count.bump { animation: bump 0.3s; }
+
+@keyframes bump {
+  50% { transform: scale(1.5); }
+}
+
+/* ---------- 4. Secondary nav ---------- */
+.subnav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  background: var(--navy-2);
+  color: #fff;
+  padding: 0 14px;
+  font-size: 14px;
+  scrollbar-width: none;
+}
+.subnav::-webkit-scrollbar { display: none; }
+
+.subnav a {
+  padding: 10px 10px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.subnav a:hover { border-color: #fff; }
+.subnav .all { font-weight: 700; }
+
+/* ---------- 5. Hero carousel ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 420px;
+}
+
+/* Fade the bottom of the hero into the page background */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8% 80px;
+  color: #fff;
+}
+.slide--1 { background: linear-gradient(120deg, #ff416c, #ff4b2b); }
+.slide--2 { background: linear-gradient(120deg, #2193b0, #1a2980); }
+.slide--3 { background: linear-gradient(120deg, #f7971e, #c0392b); }
+
+.slide-text h2 { font-size: clamp(28px, 4.5vw, 52px); line-height: 1.1; }
+.slide-text p { margin: 12px 0 22px; font-size: clamp(16px, 2vw, 22px); }
+.slide-art { font-size: clamp(90px, 16vw, 200px); filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.3)); }
+
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 20px;
+  background: var(--orange);
+  color: var(--navy);
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn:hover { background: var(--orange-dark); }
+.btn:active { transform: scale(0.97); }
+.btn--full { display: block; width: 100%; border-radius: 8px; }
+
+.arrow {
+  position: absolute;
+  top: 40%;
+  z-index: 3;
+  width: 52px;
+  height: 90px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+.arrow:hover { background: rgba(0, 0, 0, 0.25); }
+.arrow.prev { left: 0; border-radius: 0 6px 6px 0; }
+.arrow.next { right: 0; border-radius: 6px 0 0 6px; }
+
+.dots {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+.dot.active { background: #fff; transform: scale(1.3); }
+
+/* ---------- 6. 4-up card grid (CSS Grid) ---------- */
+.cards {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  max-width: 1500px;
+  margin: -170px auto 0;
+  padding: 0 18px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--surface);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card h3 { font-size: 19px; }
+
+.tiles {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.tile .emoji {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f3f6fa, #e1e8f0);
+  font-size: 44px;
+  transition: transform 0.2s;
+}
+.tile:hover .emoji { transform: scale(1.05); }
+
+.card-link { color: var(--link); font-size: 14px; }
+.card-link:hover { color: #c7511f; text-decoration: underline; }
+
+.sign-card p { color: var(--muted); font-size: 14px; }
+.sign-card .small { font-size: 12px; }
+.sign-card .small a { color: var(--link); }
+
+/* ---------- 7. Product shelves ---------- */
+.shelf {
+  max-width: 1500px;
+  margin: 18px auto;
+  padding: 18px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.shelf-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.shelf-head h2 { font-size: 21px; }
+.shelf-head a { color: var(--link); font-size: 14px; }
+.shelf-head a:hover { color: #c7511f; text-decoration: underline; }
+
+.shelf-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x proximity;
+}
+
+.product {
+  flex: 0 0 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #e7e7e7;
+  border-radius: var(--radius);
+  scroll-snap-align: start;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.product:hover { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18); transform: translateY(-3px); }
+.product.hidden { display: none; }
+
+.product .thumb {
+  display: grid;
+  place-items: center;
+  height: 150px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f3f6fa, #dfe7f0);
+  font-size: 70px;
+}
+.product .name { font-size: 14px; min-height: 40px; }
+.product .stars { color: #f08804; font-size: 14px; letter-spacing: 1px; }
+.product .stars small { color: var(--link); letter-spacing: 0; margin-left: 4px; }
+.product .price { color: var(--price); font-size: 20px; font-weight: 600; }
+.product .old { color: var(--muted); font-size: 12px; text-decoration: line-through; }
+.product .add {
+  margin-top: auto;
+  padding: 8px;
+  border: 1px solid #fcd200;
+  border-radius: 20px;
+  background: #ffd814;
+  font-size: 13px;
+}
+.product .add:hover { background: #f7ca00; }
+
+.no-results {
+  padding: 24px;
+  color: var(--muted);
+}
+
+/* ---------- 8. Footer ---------- */
+.footer { margin-top: 24px; background: var(--navy-2); color: #ddd; }
+
+.to-top {
+  display: block;
+  padding: 14px;
+  background: #37475a;
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+}
+.to-top:hover { background: #485769; }
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 36px 20px;
+}
+.footer-cols h4 { margin-bottom: 10px; color: #fff; }
+.footer-cols a { display: block; padding: 3px 0; font-size: 14px; }
+.footer-cols a:hover { text-decoration: underline; }
+
+.footer-bottom {
+  padding: 18px 20px;
+  background: var(--navy);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ---------- 9. Toast message ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  z-index: 100;
+  padding: 12px 22px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 20px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- 10. Responsive ---------- */
+@media (max-width: 1100px) {
+  .cards { grid-template-columns: repeat(2, 1fr); margin-top: -120px; }
+  .location, .lang, .returns { display: none; }
+}
+
+@media (max-width: 640px) {
+  .navbar { flex-wrap: wrap; padding: 8px 12px; }
+  .search { order: 5; flex: 1 1 100%; }
+  .account { display: none; }
+  .hero { height: 340px; }
+  .slide-art { display: none; }
+  .cards { grid-template-columns: 1fr; margin-top: -90px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+}

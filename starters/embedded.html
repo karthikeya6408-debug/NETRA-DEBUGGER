@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+    /* Universal Selector */
+    *{
+        background: yellow;
+      }
+    /* Type Selector */
+    h3{
+        color: red;
+        text-align: center;
+    }
+    /* ID Selector */
+    #menu{
+        background: greenyellow;
+        font-family: Arial, Helvetica, sans-serif;
+        display: inline-block;
+    }
+    /* Class selector */
+    .fed{
+        font-weight: bold;
+    }
+  /* Pseudo class selector  */
+   h5 a:link{
+        color: #ff00e1;
+    }
+    a:visited{
+        color: aqua;
+    }
+    a:hover{
+        color: red;
+    }
+    a:active{
+        color: green;
+    }
+
+    /* Descendent selector */
+    h4 ul{
+       background: blue; 
+    }
+
+    h4 ul li{
+        color: #ff00e1;
+    }
+
+    </style>
+
+</head>
+<body>
+    <h3>Welcome to KL University</h3>
+    <p id="menu">Full Stack Development: FrontEnd Frameworks</p>
+    <p class="fed">This course is meant for website development</p>
+    <a href="/List.html">Click Me1</a>
+
+   <h4>
+        <ul>
+            <li>CSE</li>
+            <li>EEE</li>
+        </ul>
+    </h4>
+    
+</body>
+</html>

@@ -1,0 +1,128 @@
+/* ====global reset==== */
+* {
+    margin: 0;/* resets the margin and padding for all elements */
+    padding: 0;/* resets the margin and padding for all elements */
+    box-sizing: border-box;/* sets the box-sizing property to border-box for all elements */
+}
+html{
+    scroll-behavior: smooth;/* smooth scrolling for anchor links */
+
+}
+body{
+    background-color: #160B2E;/* background color of the body */
+      color: #F1E5CC;/* color of the text */
+    font-family: Arial, Helvetica, sans-serif;/* font family for the body */
+    min-height: 100vh;/* sets the minimum height of the body to 100% of the viewport height */
+
+}
+button{
+    font-family: 'Poppins', sans-serif;/* font family for the button */
+    background-color: #C5A15B;/* background color of the button */
+    color: #160B2E;/* color of the text */
+    border-radius: 10px ;/* border radius for the button */
+    padding: 10px 25px;/* padding for the button */
+    cursor: pointer;/* changes the cursor to a pointer when hovered */
+    FONT-WEIGHT: 600;/* font weight for the button */
+    
+}
+button:hover{
+    background-color: #D6B46F;/* changes the background color of the button when hovered */
+    color: #130D24;/* changes the color of the text when hovered */
+    font-weight: bold;/* makes the text bold when hovered */
+    font-size: 14px;
+}
+/* header section */
+/* creates the top navigation bar */
+
+.topbar{
+  min-height: 82px;/* height of the top navigation bar */
+  display: flex;/* makes the logo and the links in the navigation bar appear in a row */
+  align-items: center;/* aligns the logo and the links in the navigation bar */
+  justify-content: space-between;/* aligns the logo and the links in the navigation bar */
+  gap: 20px;/* gap between the logo and the links in the navigation bar */
+  padding:  15px 4%;/* padding for the top navigation bar */
+  background-color:#120820 ;/* background color of the top navigation bar */
+
+  border-bottom: 1px solid #49365C;/* border for the top navigation bar */
+}
+.brand{
+    display: flex;/* makes the logo and the title appear in a row */
+    align-items: center;/* aligns the logo and the title in the center */
+    gap: 12px;/* gap between the logo and the title */
+    COLOR: #F1E5CC;/* color of the text */
+    
+}
+
+.brand p{
+    font-size: 13px;
+    font-weight:500;
+    color:#D6C5A5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top:2px;
+}
+
+nav{
+    display: flex;/* makes the links in the navigation bar appear in a row */
+    align-items: center;/* aligns the links in the center */
+    gap: 35px;/* gap between the links in the navigation bar */
+    transition:  all 200ms ease;/* adds a transition effect to the links in the navigation bar */
+}
+
+nav a{/*this is for hte normal state of the links in the navigation bar */
+     color: #BDB0C9;/* color of the text */
+    text-decoration: none;/* removes the underline from the text */
+    font-size: 15px;/* font size of the text */
+    align-items: center;/* aligns the text in the center */
+    font-weight: 500;/* font weight of the text */
+
+}
+nav a:hover{
+    color: #C5A15B;/* changes the color of the text when hovered */
+    font-weight: bold;/* makes the text bold when hovered */
+}
+/* Active state of navigation links */
+nav a.active {/*this is for the active state of the links in the navigation bar */
+    color: #C5A15B;/* changes the color of the text when active */
+    font-weight: 600;/* makes the text bold when active */
+    text-decoration: underline;/* adds an underline to the text when active */
+    text-decoration-color: #C5A15B;/* changes the color of the underline when active */
+    text-decoration-thickness: 2px;/* changes the thickness of the underline when active */
+    text-underline-offset: 8px;/* changes the offset of the underline when active */
+}
+
+.brand-logo{/*this is for the logo */
+    width: 50px;/* size of the logo */
+    height: 50px;/* size of the logo */
+    border-radius: 11px;/* makes the logo appear in a square shape */
+    padding-top: 7px;/* padding for the logo on to the top */
+    padding-left: 12px;/* padding for the logo on to the left */
+    padding-right: 10px;/* padding for the logo on to the right */
+    padding-bottom: 10px;/* padding for the logo  on to the bottom*/
+    background-color: #C5A15B;/* background color of the logo */
+    align-items: center;/* aligns the logo in the center */
+    font-weight: 600;/* font weight of the logo */
+    font-size: 33px;/* font size of the logo */
+}
+
+.brand h1{/*this is for the netra title */
+    font-size: 25px;/* font size of the title */
+    font-weight: bold;/* font weight of the title */
+    gap: 5px;/* gap between the title and the subtitle */
+    letter-spacing: 3px;/* spacing between the letters of the title */
+}
+.header-right{/*this is for the system status and live clock */
+    display: flex;/* makes the system status and live clock appear in a row */
+    align-items: center;/* aligns the system status and live clock vertically */
+    gap: 10px;/* gap between the system status and live clock */
+    font-size: 13 px;/* font size of the system status and live clock */
+    color: #34D399;/* green color for online status(system.online) */
+    font-weight: 600;/* font weight of the system status and live clock */
+}
+
+.online-dot{/*this is for the green dot which indicates the system is online */
+    width: 10px;/* size(width) of the dot */
+    height: 10px;/* size(height) of the dot */
+    border-radius: 50%;/* makes the dot which is initially square into circular */ 
+    background-color: #34D399   ;/* green color for online status */
+}

@@ -1,0 +1,2012 @@
+    # CSS — CASCADING STYLE SHEETS
+## Complete Study Notes | Module 1
+
+============================================================
+1. INTRODUCTION TO CSS
+============================================================
+
+1.1 What is CSS?
+
+CSS stands for Cascading Style Sheets.
+
+CSS is a stylesheet language used to describe the presentation and visual appearance of documents written in HTML or XML.
+
+It controls how HTML elements are displayed on a webpage.
+
+CSS is responsible for:
+- Colours and backgrounds.
+- Fonts and text formatting.
+- Width and height of elements.
+- Spacing and alignment.
+- Borders and shadows.
+- Page layouts.
+- Responsive web design.
+- Animations and transitions.
+
+Example:
+
+HTML:
+<h1>Hello World</h1>
+
+CSS:
+h1 {
+    color: blue;
+    font-size: 30px;
+}
+
+Output:
+The heading appears in blue colour with a font size of 30 pixels.
+
+1.2 Why is CSS needed?
+
+HTML provides the structure and meaning of a webpage, whereas CSS controls its appearance.
+
+Without CSS:
+- Webpages have basic browser-default styling.
+- Layout customization is limited.
+- Maintaining consistent designs becomes difficult.
+- Complex page layouts are harder to create.
+
+Advantages of CSS:
+
+1. Separation of Concerns:
+   Separates webpage structure (HTML) from presentation (CSS).
+
+2. Consistency:
+   A single stylesheet can maintain a uniform design across multiple webpages.
+
+3. Reusability:
+   CSS rules can be reused across multiple HTML documents.
+
+4. Maintainability:
+   Changes to a common stylesheet can update several webpages.
+
+5. Responsive Design:
+   Allows webpages to adapt to different screen sizes.
+
+6. Performance:
+   External CSS files can be cached by browsers, reducing repeated downloads.
+
+7. Accessibility:
+   Appropriate styling can improve readability and visual clarity.
+
+1.3 CSS Versions and Evolution
+
+CSS1 (1996):
+- Introduced basic styling.
+- Supported fonts, colours, margins and backgrounds.
+
+CSS2 (1998):
+- Introduced positioning.
+- Improved media support.
+- Added advanced layout and styling features.
+
+CSS2.1:
+- Corrected and standardized several CSS2 features.
+
+CSS3:
+- Introduced modular development.
+- Added features such as animations, transitions, gradients, media queries and advanced selectors.
+
+Modern CSS:
+- Includes Flexbox, Grid, custom properties, container queries and many other capabilities.
+- CSS is continuously developed through independent modules rather than one single CSS3 specification.
+
+
+============================================================
+2. CSS SYNTAX
+============================================================
+
+2.1 Basic CSS Syntax
+
+A CSS rule consists of a selector and a declaration block.
+
+Syntax:
+
+selector {
+    property: value;
+}
+
+Example:
+
+p {
+    color: red;
+    font-size: 18px;
+}
+
+Explanation:
+
+1. Selector:
+   Identifies the HTML element to which the style should be applied.
+
+2. Declaration Block:
+   Contains one or more CSS declarations enclosed within curly braces.
+
+3. Property:
+   Specifies the characteristic that needs to be changed.
+
+4. Value:
+   Specifies the setting assigned to the property.
+
+5. Declaration:
+   A combination of a property and its value.
+
+Example:
+
+color: red;
+
+Here:
+- Property = color
+- Value = red
+- Declaration = color: red;
+
+Important Syntax Rules:
+
+- CSS declarations are separated by semicolons.
+- Properties and values are separated by colons.
+- Declaration blocks are enclosed within curly braces.
+- CSS selectors identify the target elements.
+- CSS comments are written using /* comment */.
+
+Example:
+
+/* This is a CSS comment */
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+
+============================================================
+3. METHODS OF INCLUDING CSS IN HTML
+============================================================
+
+There are THREE main methods of applying CSS to HTML documents.
+
+3.1 Inline CSS
+
+Inline CSS is applied directly to an HTML element using the style attribute.
+
+Syntax:
+
+<tag style="property: value;">
+
+Example:
+
+<h1 style="color: red; font-size: 30px;">
+    Welcome
+</h1>
+
+Advantages:
+- Simple to use.
+- Useful for applying a unique style to an individual element.
+- Does not require a separate stylesheet.
+
+Disadvantages:
+- Difficult to maintain.
+- Cannot be easily reused.
+- Mixes presentation with HTML structure.
+- Makes large HTML documents difficult to manage.
+
+3.2 Internal CSS
+
+Internal CSS is written inside the <style> element, usually within the <head> section of an HTML document.
+
+Example:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internal CSS</title>
+
+    <style>
+        h1 {
+            color: blue;
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome</h1>
+    <p>This is an example.</p>
+</body>
+</html>
+
+Advantages:
+- Suitable for styling a single webpage.
+- No separate CSS file is required.
+- Allows multiple elements to share styles.
+
+Disadvantages:
+- Cannot be directly reused across separate HTML files.
+- Increases the size of the HTML document.
+- Difficult to maintain in large websites.
+
+3.3 External CSS
+
+External CSS is written in a separate file with the .css extension and connected to an HTML document using the <link> element.
+
+Example:
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>External CSS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Welcome</h1>
+    <p>This is an external CSS example.</p>
+</body>
+</html>
+
+CSS FILE (style.css):
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+}
+
+Advantages:
+- Separates HTML and CSS.
+- Reusable across multiple webpages.
+- Easier maintenance.
+- Improves consistency.
+- Browser caching can improve loading performance.
+
+Disadvantages:
+- Requires an additional file.
+- The webpage needs to load the external stylesheet.
+- Incorrect file paths can prevent styles from loading.
+
+3.4 Difference Between Inline, Internal and External CSS
+
+INLINE CSS:
+- Written inside the HTML element.
+- Uses the style attribute.
+- Applies directly to an individual element.
+- Reusability is low.
+
+INTERNAL CSS:
+- Written inside the <style> element.
+- Usually placed in the HTML head.
+- Applies to elements in one HTML document.
+- Reusability across pages is limited.
+
+EXTERNAL CSS:
+- Written in a separate .css file.
+- Connected using the <link> element.
+- Can style multiple HTML documents.
+- Highly reusable and maintainable.
+
+IMPORTANT:
+External CSS is generally preferred for large websites because it provides better separation, consistency and maintainability.
+
+
+============================================================
+4. CSS SELECTORS
+============================================================
+
+4.1 What is a CSS Selector?
+
+A CSS selector is a pattern used to select HTML elements to which CSS styles should be applied.
+
+Selectors determine WHICH HTML elements receive a particular style.
+
+4.2 Types of CSS Selectors
+
+A. Universal Selector (*)
+
+Selects all HTML elements.
+
+Syntax:
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+B. Element Selector
+
+Selects all elements having a particular HTML tag name.
+
+Example:
+
+p {
+    color: blue;
+}
+
+This applies blue colour to all paragraph elements.
+
+C. ID Selector (#)
+
+Selects an HTML element using its unique ID.
+
+Syntax:
+
+#idname {
+    property: value;
+}
+
+Example:
+
+#heading {
+    color: red;
+}
+
+HTML:
+
+<h1 id="heading">Hello</h1>
+
+Important:
+- An ID should be unique within an HTML document.
+- ID selectors are represented using #.
+
+D. Class Selector (.)
+
+Selects all elements having a particular class name.
+
+Syntax:
+
+.classname {
+    property: value;
+}
+
+Example:
+
+.highlight {
+    background-color: yellow;
+}
+
+HTML:
+
+<p class="highlight">Paragraph 1</p>
+<p class="highlight">Paragraph 2</p>
+
+Important:
+- Multiple elements can share the same class.
+- Class selectors are represented using a dot (.).
+
+E. Grouping Selector
+
+Applies the same CSS rules to multiple selectors.
+
+Example:
+
+h1, h2, p {
+    color: green;
+}
+
+This applies green colour to all h1, h2 and p elements.
+
+F. Descendant Selector
+
+Selects elements located anywhere inside another specified element.
+
+Syntax:
+
+ancestor descendant {
+    property: value;
+}
+
+Example:
+
+div p {
+    color: red;
+}
+
+This selects all paragraph elements inside a div, including nested descendants.
+
+G. Child Selector (>)
+
+Selects only the direct children of a specified element.
+
+Example:
+
+div > p {
+    color: blue;
+}
+
+This selects paragraph elements that are direct children of div.
+
+H. Adjacent Sibling Selector (+)
+
+Selects the immediately following sibling element.
+
+Example:
+
+h1 + p {
+    color: green;
+}
+
+This selects the first paragraph immediately following an h1 element.
+
+I. General Sibling Selector (~)
+
+Selects all matching sibling elements that appear after a specified element under the same parent.
+
+Example:
+
+h1 ~ p {
+    color: purple;
+}
+
+This selects all following paragraph siblings of h1.
+
+4.3 Attribute Selectors
+
+Attribute selectors select elements based on their HTML attributes or attribute values.
+
+Example:
+
+input[type="text"] {
+    border: 1px solid blue;
+}
+
+This selects input elements whose type attribute is text.
+
+Other examples:
+
+a[target] {
+    color: red;
+}
+
+Selects anchor elements having a target attribute.
+
+4.4 Pseudo-Classes
+
+A pseudo-class defines a special state of an HTML element.
+
+It is represented using a single colon (:).
+
+Common pseudo-classes:
+
+:hover
+Applies styles when the mouse pointer moves over an element.
+
+:active
+Applies styles while an element is being activated.
+
+:focus
+Applies styles when an element receives focus.
+
+:first-child
+Selects an element that is the first child of its parent.
+
+:last-child
+Selects an element that is the last child of its parent.
+
+:nth-child()
+Selects elements according to their position among siblings.
+
+:checked
+Selects checked input elements.
+
+Example:
+
+button:hover {
+    background-color: blue;
+    color: white;
+}
+
+4.5 Pseudo-Elements
+
+Pseudo-elements allow specific parts of an element to be styled or generated.
+
+They are generally represented using double colons (::).
+
+Common pseudo-elements:
+
+::before
+Inserts generated content before an element's content.
+
+::after
+Inserts generated content after an element's content.
+
+::first-letter
+Selects the first letter of an element.
+
+::first-line
+Selects the first line of an element.
+
+::selection
+Styles the portion of text selected by the user.
+
+Example:
+
+p::first-letter {
+    font-size: 30px;
+    color: red;
+}
+
+4.6 Difference Between Pseudo-Class and Pseudo-Element
+
+PSEUDO-CLASS:
+- Represents a particular state or condition.
+- Generally uses a single colon.
+- Example: :hover, :focus, :first-child.
+
+PSEUDO-ELEMENT:
+- Targets a specific part of an element or generates content.
+- Uses double colons in modern CSS.
+- Example: ::before, ::after, ::first-letter.
+
+
+============================================================
+5. CASCADING, INHERITANCE AND SPECIFICITY
+============================================================
+
+5.1 What is Cascading?
+
+Cascading is the process through which a browser determines which CSS declaration should be applied when multiple CSS rules target the same element.
+
+The browser considers:
+- Origin and importance of declarations.
+- Cascade layer.
+- Specificity.
+- Source order.
+
+5.2 CSS Specificity
+
+Specificity determines the relative priority of selectors when competing declarations apply to the same element.
+
+Basic specificity ranking:
+
+1. Inline styles.
+2. ID selectors.
+3. Class, attribute and pseudo-class selectors.
+4. Element and pseudo-element selectors.
+5. Universal selector (no specificity).
+
+Specificity can be represented using four components:
+
+Inline - ID - Class - Element
+
+Example:
+
+#heading {
+    color: red;
+}
+
+.heading {
+    color: blue;
+}
+
+h1 {
+    color: green;
+}
+
+HTML:
+
+<h1 id="heading" class="heading">Hello</h1>
+
+The heading appears red because the ID selector has higher specificity than the class and element selectors.
+
+IMPORTANT:
+Specificity is not the only factor in the cascade. Importance, cascade layers and origin are also considered.
+
+5.3 !important
+
+The !important declaration gives a CSS declaration special priority within the cascade.
+
+Example:
+
+p {
+    color: red !important;
+}
+
+Even if another normal declaration has higher specificity, the important declaration generally takes priority within the same origin and layer context.
+
+Excessive use of !important should be avoided because it makes CSS difficult to maintain.
+
+5.4 Inheritance
+
+Inheritance is the process by which certain CSS property values are passed from a parent element to its child elements.
+
+Example:
+
+body {
+    color: blue;
+    font-family: Arial;
+}
+
+The child elements generally inherit the text colour and font family unless another applicable rule overrides them.
+
+Common inherited properties:
+- color
+- font-family
+- font-size
+- line-height
+- text-align
+
+Common non-inherited properties:
+- margin
+- padding
+- border
+- width
+- height
+
+5.5 Initial, Inherit and Unset
+
+initial:
+Sets a property to its initial value as defined by CSS.
+
+inherit:
+Forces an element to take the computed value from its parent.
+
+unset:
+Acts as inherit for inherited properties and initial for non-inherited properties.
+
+
+============================================================
+6. CSS COLOURS AND BACKGROUNDS
+============================================================
+
+6.1 Colour Property
+
+The color property specifies the foreground colour of an element's text.
+
+Example:
+
+p {
+    color: red;
+}
+
+CSS supports different colour formats:
+
+1. Named colours:
+
+color: red;
+color: blue;
+
+2. HEX notation:
+
+color: #FF0000;
+
+3. RGB notation:
+
+color: rgb(255, 0, 0);
+
+4. RGBA notation:
+
+color: rgba(255, 0, 0, 0.5);
+
+5. HSL notation:
+
+color: hsl(0, 100%, 50%);
+
+6. HSLA notation:
+
+color: hsla(0, 100%, 50%, 0.5);
+
+6.2 Background Properties
+
+A. background-color
+
+Specifies the background colour of an element.
+
+Example:
+
+body {
+    background-color: lightblue;
+}
+
+B. background-image
+
+Specifies an image as the background.
+
+Example:
+
+body {
+    background-image: url("image.jpg");
+}
+
+C. background-repeat
+
+Controls whether the background image repeats.
+
+Common values:
+- repeat
+- no-repeat
+- repeat-x
+- repeat-y
+
+D. background-position
+
+Specifies the position of the background image.
+
+Example:
+
+background-position: center;
+
+E. background-size
+
+Controls the size of the background image.
+
+Common values:
+- auto
+- cover
+- contain
+
+cover:
+Resizes the image to cover the entire background area, potentially cropping it.
+
+contain:
+Resizes the image so the entire image fits inside the background area.
+
+F. background-attachment
+
+Controls whether the background image scrolls with the page or remains fixed relative to the viewport.
+
+Common values:
+- scroll
+- fixed
+- local
+
+G. background shorthand
+
+Combines multiple background properties.
+
+Example:
+
+body {
+    background: lightblue url("image.jpg") no-repeat center / cover;
+}
+
+
+============================================================
+7. CSS TEXT AND FONT PROPERTIES
+============================================================
+
+7.1 Text Properties
+
+A. color
+
+Changes the text colour.
+
+B. text-align
+
+Controls horizontal alignment of text.
+
+Values:
+- left
+- right
+- center
+- justify
+
+C. text-decoration
+
+Adds or removes text decorations.
+
+Values:
+- underline
+- overline
+- line-through
+- none
+
+D. text-transform
+
+Changes the capitalization of text.
+
+Values:
+- uppercase
+- lowercase
+- capitalize
+- none
+
+E. text-indent
+
+Specifies indentation of the first line of text.
+
+F. letter-spacing
+
+Controls the spacing between characters.
+
+G. word-spacing
+
+Controls the spacing between words.
+
+H. line-height
+
+Controls the distance between lines of text.
+
+Example:
+
+p {
+    text-align: justify;
+    text-transform: none;
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
+
+7.2 Font Properties
+
+A. font-family
+
+Specifies the typeface used for text.
+
+Example:
+
+font-family: Arial, sans-serif;
+
+B. font-size
+
+Specifies the size of text.
+
+Example:
+
+font-size: 20px;
+
+C. font-weight
+
+Controls the thickness of characters.
+
+Common values:
+- normal
+- bold
+- lighter
+- bolder
+- 100 to 900
+
+D. font-style
+
+Controls the style of text.
+
+Values:
+- normal
+- italic
+- oblique
+
+E. font-variant
+
+Controls certain typographic variations, such as small capital letters.
+
+7.3 Font Shorthand
+
+Multiple font properties can be combined.
+
+Example:
+
+p {
+    font: italic bold 18px Arial, sans-serif;
+}
+
+
+============================================================
+8. CSS BOX MODEL
+============================================================
+
+8.1 What is the CSS Box Model?
+
+The CSS Box Model describes how every HTML element is represented as a rectangular box.
+
+It consists of four main components:
+
+1. Content
+2. Padding
+3. Border
+4. Margin
+
+Structure:
+
++---------------------------------------+
+|                MARGIN                 |
+|   +-------------------------------+   |
+|   |            BORDER             |   |
+|   |   +-----------------------+   |   |
+|   |   |        PADDING        |   |   |
+|   |   |   +---------------+   |   |   |
+|   |   |   |    CONTENT    |   |   |   |
+|   |   |   +---------------+   |   |   |
+|   |   +-----------------------+   |   |
+|   +-------------------------------+   |
++---------------------------------------+
+
+8.2 Components of the Box Model
+
+A. Content:
+The actual text, image or other content inside the element.
+
+B. Padding:
+The space between the content and the border.
+
+C. Border:
+The boundary surrounding the content and padding.
+
+D. Margin:
+The space outside the border, separating an element from other elements.
+
+8.3 Example
+
+div {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}
+
+Under the default content-box model:
+
+Total width =
+Content width + Left padding + Right padding
++ Left border + Right border
+
+= 200 + 20 + 20 + 5 + 5
+
+= 250px
+
+Total height =
+100 + 20 + 20 + 5 + 5
+
+= 150px
+
+The external margin is not included in the box's width and height.
+
+8.4 box-sizing Property
+
+The box-sizing property determines how the width and height of an element are calculated.
+
+Two important values:
+
+1. content-box
+
+Default value.
+
+Width and height apply only to the content area.
+
+2. border-box
+
+Width and height include content, padding and border.
+
+Example:
+
+* {
+    box-sizing: border-box;
+}
+
+This makes element sizing easier to manage in most layouts.
+
+IMPORTANT EXAM POINT:
+
+Total element width in content-box:
+
+Width + Left padding + Right padding
++ Left border + Right border
+
+Total occupied horizontal space additionally includes left and right margins.
+
+
+============================================================
+9. CSS DISPLAY PROPERTY
+============================================================
+
+9.1 What is the Display Property?
+
+The display property determines how an element participates in the layout of a webpage.
+
+Common display values:
+
+A. block
+
+- Starts on a new line.
+- Generally occupies the available width.
+- Width and height can be specified.
+
+Examples:
+<div>, <p>, <h1>
+
+B. inline
+
+- Does not start on a new line.
+- Occupies only the space required by its content.
+- Width and height do not control the normal inline box in the same way as block elements.
+
+Examples:
+<span>, <a>, <strong>
+
+C. inline-block
+
+- Appears inline with surrounding content.
+- Allows width and height to be specified.
+- Combines characteristics of inline and block elements.
+
+D. none
+
+Removes the element from the layout and prevents it from being displayed.
+
+Example:
+
+div {
+    display: none;
+}
+
+E. flex
+
+Creates a flex formatting context for arranging items in one dimension.
+
+F. grid
+
+Creates a grid formatting context for arranging items in rows and columns.
+
+9.2 Difference Between display: none and visibility: hidden
+
+display: none:
+- Element is not displayed.
+- Does not occupy layout space.
+
+visibility: hidden:
+- Element is invisible.
+- Still occupies its original layout space.
+
+
+============================================================
+10. CSS POSITIONING
+============================================================
+
+10.1 What is Positioning?
+
+The position property determines how an element is positioned within a webpage.
+
+Types of positioning:
+
+A. static
+
+- Default positioning method.
+- Element follows the normal document flow.
+- top, right, bottom and left do not reposition it.
+
+B. relative
+
+- Element remains in the normal document flow.
+- Can be shifted relative to its original position.
+- Original layout space is retained.
+
+C. absolute
+
+- Element is removed from the normal document flow.
+- Positioned relative to its nearest positioned ancestor.
+- If no suitable positioned ancestor exists, its containing block is generally the initial containing block.
+
+D. fixed
+
+- Element is removed from the normal document flow.
+- Positioned relative to the viewport in the usual case.
+- Remains in place while the document scrolls.
+
+E. sticky
+
+- Behaves like a relatively positioned element until a specified scrolling threshold is reached.
+- Then behaves like a fixed-positioned element within its containing block.
+
+Example:
+
+.box {
+    position: relative;
+    top: 20px;
+    left: 30px;
+}
+
+10.2 Positioning Properties
+
+top:
+Controls the top offset.
+
+bottom:
+Controls the bottom offset.
+
+left:
+Controls the left offset.
+
+right:
+Controls the right offset.
+
+z-index:
+Controls the stacking order of positioned elements and other applicable stacking-context participants.
+
+Higher z-index values generally appear above lower values within the same stacking context.
+
+
+============================================================
+11. CSS FLOAT AND CLEAR
+============================================================
+
+11.1 Float Property
+
+The float property allows an element to move to the left or right side of its containing block.
+
+It allows surrounding inline content to flow around the floated element.
+
+Values:
+- left
+- right
+- none
+- inline-start
+- inline-end
+
+Example:
+
+img {
+    float: left;
+    margin-right: 15px;
+}
+
+11.2 Clear Property
+
+The clear property specifies whether an element can appear next to floated elements.
+
+Values:
+- left
+- right
+- both
+- none
+
+Example:
+
+.footer {
+    clear: both;
+}
+
+IMPORTANT:
+Float was traditionally used for page layouts, but modern layouts generally use Flexbox and CSS Grid.
+
+
+============================================================
+12. CSS FLEXBOX
+============================================================
+
+12.1 What is Flexbox?
+
+Flexbox, or Flexible Box Layout, is a CSS layout model designed to arrange elements efficiently within a container.
+
+It is mainly used for one-dimensional layouts.
+
+This means elements are arranged primarily along:
+- A row (horizontal direction).
+- A column (vertical direction).
+
+12.2 Flex Container and Flex Items
+
+Flex Container:
+The parent element on which display: flex is applied.
+
+Flex Items:
+The direct children of the flex container.
+
+Example:
+
+.container {
+    display: flex;
+}
+
+12.3 Important Flexbox Properties
+
+A. flex-direction
+
+Specifies the direction of flex items.
+
+Values:
+- row
+- row-reverse
+- column
+- column-reverse
+
+B. justify-content
+
+Controls the distribution of items along the main axis.
+
+Values:
+- flex-start
+- flex-end
+- center
+- space-between
+- space-around
+- space-evenly
+
+C. align-items
+
+Controls alignment along the cross axis.
+
+Values:
+- stretch
+- flex-start
+- flex-end
+- center
+- baseline
+
+D. flex-wrap
+
+Controls whether items wrap onto multiple lines.
+
+Values:
+- nowrap
+- wrap
+- wrap-reverse
+
+E. align-content
+
+Controls the distribution of multiple flex lines along the cross axis when extra space is available.
+
+F. gap
+
+Controls the spacing between flex items.
+
+Example:
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+12.4 Flexbox Item Properties
+
+flex-grow:
+Specifies how much an item can grow relative to other flex items.
+
+flex-shrink:
+Specifies how much an item can shrink.
+
+flex-basis:
+Specifies the initial main size of a flex item before remaining space is distributed.
+
+align-self:
+Overrides the container's align-items setting for an individual item.
+
+order:
+Controls the visual ordering of flex items.
+
+
+============================================================
+13. CSS GRID LAYOUT
+============================================================
+
+13.1 What is CSS Grid?
+
+CSS Grid is a two-dimensional layout system used to arrange elements into rows and columns.
+
+It is suitable for complex page layouts.
+
+13.2 Grid Container and Grid Items
+
+Grid Container:
+The parent element with display: grid.
+
+Grid Items:
+The direct children of the grid container.
+
+Example:
+
+.container {
+    display: grid;
+}
+
+13.3 Important Grid Properties
+
+A. grid-template-columns
+
+Defines the number and size of grid columns.
+
+Example:
+
+.container {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+}
+
+Creates three columns, each 200px wide.
+
+B. grid-template-rows
+
+Defines the size of grid rows.
+
+Example:
+
+grid-template-rows: 100px 150px;
+
+C. gap
+
+Specifies spacing between rows and columns.
+
+D. column-gap
+
+Controls horizontal spacing between columns.
+
+E. row-gap
+
+Controls vertical spacing between rows.
+
+F. grid-column
+
+Controls how many columns an item occupies or where it is placed.
+
+G. grid-row
+
+Controls how many rows an item occupies or where it is placed.
+
+H. repeat()
+
+Repeats a specified column or row pattern.
+
+Example:
+
+grid-template-columns: repeat(3, 1fr);
+
+Creates three equal-width columns.
+
+I. fr Unit
+
+The fr unit represents a fraction of the available space in a CSS Grid container.
+
+Example:
+
+grid-template-columns: 1fr 2fr 1fr;
+
+The middle column receives twice the fractional space of either of the other columns.
+
+13.4 Difference Between Flexbox and Grid
+
+FLEXBOX:
+- One-dimensional layout system.
+- Works primarily with rows or columns.
+- Suitable for navigation bars, buttons and component alignment.
+- Content-oriented layout.
+
+GRID:
+- Two-dimensional layout system.
+- Works with rows and columns simultaneously.
+- Suitable for complete page layouts and complex structures.
+- Layout-oriented system.
+
+
+============================================================
+14. CSS UNITS OF MEASUREMENT
+============================================================
+
+CSS units determine the size, distance and dimensions of elements.
+
+14.1 Absolute Units
+
+Absolute units represent fixed physical or screen-related measurements.
+
+Common units:
+
+px = pixels
+cm = centimetres
+mm = millimetres
+in = inches
+pt = points
+pc = picas
+
+Example:
+
+h1 {
+    font-size: 24px;
+}
+
+14.2 Relative Units
+
+Relative units depend on another measurement or context.
+
+A. em
+
+Relative to the computed font size of the element's parent for font-size calculations.
+
+For other properties, it is based on the element's own computed font size.
+
+B. rem
+
+Relative to the root element's font size.
+
+C. %
+
+Percentage-based value relative to the relevant reference quantity.
+
+D. vw
+
+1vw = 1% of the viewport width.
+
+E. vh
+
+1vh = 1% of the viewport height.
+
+F. vmin
+
+1vmin = 1% of the smaller viewport dimension.
+
+G. vmax
+
+1vmax = 1% of the larger viewport dimension.
+
+Example:
+
+.container {
+    width: 80%;
+    font-size: 1.2rem;
+}
+
+14.3 Difference Between px, em and rem
+
+px:
+- Absolute CSS length unit.
+- Does not scale based on font-size inheritance.
+
+em:
+- Relative to font size.
+- Can produce compounding effects in nested elements.
+
+rem:
+- Relative to the root element's font size.
+- Provides more predictable scaling across a document.
+
+
+============================================================
+15. CSS BORDERS, MARGINS AND PADDING
+============================================================
+
+15.1 Border Properties
+
+The border property creates a boundary around an element.
+
+Important properties:
+
+border-width:
+Specifies border thickness.
+
+border-style:
+Specifies border appearance.
+
+Common values:
+- solid
+- dotted
+- dashed
+- double
+- groove
+- ridge
+- inset
+- outset
+- none
+
+border-color:
+Specifies border colour.
+
+border-radius:
+Creates rounded corners.
+
+Example:
+
+div {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+15.2 Margin
+
+Margin creates space outside an element's border.
+
+Example:
+
+div {
+    margin: 20px;
+}
+
+Individual properties:
+
+margin-top
+margin-right
+margin-bottom
+margin-left
+
+15.3 Padding
+
+Padding creates space between the content and the border.
+
+Example:
+
+div {
+    padding: 20px;
+}
+
+Individual properties:
+
+padding-top
+padding-right
+padding-bottom
+padding-left
+
+15.4 Shorthand Notation
+
+One value:
+
+margin: 10px;
+
+All four sides receive 10px.
+
+Two values:
+
+margin: 10px 20px;
+
+Top and bottom = 10px.
+Left and right = 20px.
+
+Three values:
+
+margin: 10px 20px 30px;
+
+Top = 10px.
+Left and right = 20px.
+Bottom = 30px.
+
+Four values:
+
+margin: 10px 20px 30px 40px;
+
+Top = 10px.
+Right = 20px.
+Bottom = 30px.
+Left = 40px.
+
+The same shorthand order applies to padding.
+
+
+============================================================
+16. CSS RESPONSIVE WEB DESIGN
+============================================================
+
+16.1 What is Responsive Web Design?
+
+Responsive Web Design (RWD) is an approach to designing webpages that automatically adapt their layout and appearance to different screen sizes and devices.
+
+Examples:
+- Desktop computers.
+- Laptops.
+- Tablets.
+- Smartphones.
+
+16.2 Importance of Responsive Design
+
+- Improves user experience.
+- Supports different screen sizes.
+- Prevents unnecessary horizontal scrolling.
+- Improves accessibility.
+- Makes websites more usable across devices.
+
+16.3 Media Queries
+
+Media queries allow CSS styles to be applied conditionally based on device or viewport characteristics.
+
+Syntax:
+
+@media media-type and (condition) {
+    CSS rules;
+}
+
+Example:
+
+body {
+    background-color: white;
+}
+
+@media (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+}
+
+Explanation:
+
+When the viewport width is 600px or less, the background colour changes to light blue.
+
+16.4 Viewport Meta Tag
+
+The viewport meta tag helps browsers display webpages correctly on mobile devices.
+
+Example:
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+Explanation:
+
+width=device-width:
+Sets the viewport width to the device's width.
+
+initial-scale=1.0:
+Sets the initial zoom level to 100%.
+
+16.5 Responsive Design Techniques
+
+1. Fluid layouts using percentages.
+2. Flexible images using max-width: 100%.
+3. CSS media queries.
+4. Flexbox and Grid.
+5. Relative units such as rem, em and vw.
+6. Mobile-first design.
+
+
+============================================================
+17. CSS TRANSITIONS, TRANSFORMS AND ANIMATIONS
+============================================================
+
+17.1 CSS Transitions
+
+Transitions allow CSS property changes to occur gradually over a specified duration.
+
+Important properties:
+
+transition-property:
+Specifies which CSS property should transition.
+
+transition-duration:
+Specifies the time taken for the transition.
+
+transition-timing-function:
+Controls the speed curve.
+
+transition-delay:
+Specifies the waiting time before the transition starts.
+
+Example:
+
+button {
+    background-color: blue;
+    transition: background-color 0.5s ease;
+}
+
+button:hover {
+    background-color: red;
+}
+
+17.2 CSS Transform
+
+The transform property modifies the visual appearance of an element through operations such as rotation, scaling, translation and skewing.
+
+Common functions:
+
+translate():
+Moves an element.
+
+rotate():
+Rotates an element.
+
+scale():
+Changes an element's size.
+
+skew():
+Skews an element.
+
+Example:
+
+div:hover {
+    transform: scale(1.1);
+}
+
+17.3 CSS Animations
+
+CSS animations allow elements to change styles through a sequence of keyframes.
+
+They do not necessarily require a user interaction.
+
+Example:
+
+@keyframes example {
+    from {
+        background-color: red;
+    }
+
+    to {
+        background-color: blue;
+    }
+}
+
+div {
+    animation-name: example;
+    animation-duration: 3s;
+}
+
+Important animation properties:
+
+animation-name
+animation-duration
+animation-delay
+animation-iteration-count
+animation-direction
+animation-timing-function
+animation-fill-mode
+
+17.4 Difference Between Transition and Animation
+
+TRANSITION:
+- Generally requires a property value change or triggering state.
+- Moves between two states.
+- Does not define multiple keyframes.
+
+ANIMATION:
+- Uses @keyframes.
+- Can contain multiple intermediate states.
+- Can run automatically and repeat multiple times.
+
+
+============================================================
+18. CSS OVERFLOW AND OPACITY
+============================================================
+
+18.1 Overflow Property
+
+The overflow property determines how content is handled when it exceeds an element's allocated dimensions.
+
+Common values:
+
+visible:
+Content can extend outside the element.
+
+hidden:
+Overflowing content is clipped.
+
+scroll:
+Provides scrolling mechanisms.
+
+auto:
+Provides scrolling mechanisms when required.
+
+Example:
+
+div {
+    width: 200px;
+    height: 100px;
+    overflow: auto;
+}
+
+18.2 Opacity Property
+
+The opacity property controls the transparency of an element.
+
+Values range from 0 to 1.
+
+0 = Completely transparent.
+0.5 = 50% opacity.
+1 = Completely opaque.
+
+Example:
+
+img {
+    opacity: 0.5;
+}
+
+
+============================================================
+19. CSS VARIABLES (CUSTOM PROPERTIES)
+============================================================
+
+19.1 What are CSS Variables?
+
+CSS custom properties are reusable values defined by developers and used throughout stylesheets.
+
+They help maintain consistency and simplify updates.
+
+Syntax:
+
+:root {
+    --main-color: blue;
+    --font-size: 20px;
+}
+
+h1 {
+    color: var(--main-color);
+    font-size: var(--font-size);
+}
+
+Explanation:
+
+--main-color:
+Defines a custom property.
+
+var():
+Retrieves the value of a custom property.
+
+:root:
+Represents the document's root element and is commonly used for global variables.
+
+Advantages:
+
+- Reduces repeated values.
+- Makes maintenance easier.
+- Improves consistency.
+- Supports dynamic changes through the cascade.
+
+
+============================================================
+20. CSS PREPROCESSORS
+============================================================
+
+A CSS preprocessor is a tool that extends CSS with additional features and converts the extended syntax into standard CSS.
+
+Examples:
+- Sass
+- Less
+- Stylus
+
+Features commonly provided by preprocessors:
+
+1. Variables.
+2. Nesting.
+3. Mixins.
+4. Functions.
+5. Reusable code structures.
+
+Example in Sass:
+
+$main-color: blue;
+
+h1 {
+    color: $main-color;
+}
+
+The preprocessor compiles the Sass code into CSS.
+
+IMPORTANT:
+Native CSS now supports custom properties and several features that previously required preprocessors. However, preprocessors still offer additional functionality.
+
+
+============================================================
+21. DIFFERENCE BETWEEN HTML AND CSS
+============================================================
+
+HTML:
+
+1. HTML stands for HyperText Markup Language.
+2. Defines the structure and meaning of webpage content.
+3. Uses elements and tags.
+4. Describes headings, paragraphs, images, links, tables and forms.
+5. Uses the .html extension.
+
+CSS:
+
+1. CSS stands for Cascading Style Sheets.
+2. Defines the presentation and appearance of webpage content.
+3. Uses selectors and declarations.
+4. Controls colours, fonts, layouts, spacing and animations.
+5. Uses the .css extension.
+
+HTML and CSS work together to create webpages.
+
+
+============================================================
+22. BEST PRACTICES IN CSS
+============================================================
+
+1. Prefer external stylesheets for larger projects.
+2. Use meaningful class names.
+3. Avoid unnecessary use of !important.
+4. Maintain consistent indentation and formatting.
+5. Reuse styles whenever possible.
+6. Use Flexbox and Grid for modern layouts.
+7. Use responsive design techniques.
+8. Avoid excessive specificity.
+9. Use CSS variables for repeated values.
+10. Organize stylesheets into logical sections.
+11. Use semantic HTML elements.
+12. Consider accessibility, colour contrast and keyboard navigation.
+13. Avoid unnecessary duplication of CSS rules.
+
+
+============================================================
+23. IMPORTANT EXAM DEFINITIONS
+============================================================
+
+1. CSS:
+A stylesheet language used to control the presentation and appearance of HTML documents.
+
+2. CSS Selector:
+A pattern used to identify HTML elements to which CSS rules are applied.
+
+3. CSS Declaration:
+A combination of a CSS property and its assigned value.
+
+4. Cascading:
+The process of determining which CSS declarations apply when multiple rules compete.
+
+5. Specificity:
+The relative priority of selectors when competing CSS declarations target the same element.
+
+6. Inheritance:
+The mechanism through which certain CSS property values are passed from parent elements to child elements.
+
+7. Box Model:
+A CSS layout concept representing every element as a rectangular box consisting of content, padding, border and margin.
+
+8. Flexbox:
+A one-dimensional CSS layout model used to arrange and distribute elements along a row or column.
+
+9. CSS Grid:
+A two-dimensional CSS layout system used to arrange elements into rows and columns.
+
+10. Media Query:
+A CSS technique used to apply styles based on device or viewport characteristics.
+
+11. Responsive Web Design:
+An approach to designing webpages that adapt to different screen sizes and devices.
+
+12. Pseudo-Class:
+A selector that targets an element based on its state or condition.
+
+13. Pseudo-Element:
+A selector used to style a specific part of an element or generate content.
+
+14. CSS Animation:
+A technique used to create animated visual effects by changing CSS properties over a sequence of keyframes.
+
+15. External CSS:
+CSS written in a separate stylesheet and connected to an HTML document using the link element.
+
+
+============================================================
+24. IMPORTANT EXAM DIFFERENCES
+============================================================
+
+Prepare these comparisons carefully:
+
+1. Inline CSS vs Internal CSS vs External CSS.
+2. ID Selector vs Class Selector.
+3. Pseudo-Class vs Pseudo-Element.
+4. Margin vs Padding.
+5. Relative Position vs Absolute Position.
+6. Fixed Position vs Sticky Position.
+7. display: none vs visibility: hidden.
+8. Block vs Inline vs Inline-block.
+9. Flexbox vs Grid.
+10. Absolute Units vs Relative Units.
+11. CSS Transition vs CSS Animation.
+12. HTML vs CSS.
+13. content-box vs border-box.
+14. CSS Inheritance vs CSS Cascading.
+
+
+============================================================
+25. FINAL REVISION CHECKLIST
+============================================================
+
+Before the examination, make sure you can explain:
+
+[ ] Definition and advantages of CSS.
+[ ] Three methods of applying CSS.
+[ ] CSS syntax and declarations.
+[ ] Types of CSS selectors.
+[ ] Class and ID selectors.
+[ ] Attribute selectors.
+[ ] Pseudo-classes and pseudo-elements.
+[ ] Cascading, inheritance and specificity.
+[ ] CSS colour formats.
+[ ] Background properties.
+[ ] Text and font properties.
+[ ] CSS Box Model with diagram.
+[ ] Margin, padding and border.
+[ ] Display property.
+[ ] CSS positioning.
+[ ] Float and clear.
+[ ] Flexbox properties.
+[ ] CSS Grid properties.
+[ ] Absolute and relative units.
+[ ] Responsive web design.
+[ ] Media queries.
+[ ] CSS transitions and animations.
+[ ] CSS variables.
+[ ] CSS best practices.
+
+END OF CSS NOTES
