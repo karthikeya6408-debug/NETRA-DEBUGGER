@@ -126,3 +126,7 @@ nav a.active {/*this is for the active state of the links in the navigation bar 
     border-radius: 50%;/* makes the dot which is initially square into circular */ 
     background-color: #34D399   ;/* green color for online status */
 }
+#clock{
+    color:aliceblue
+    
+}
