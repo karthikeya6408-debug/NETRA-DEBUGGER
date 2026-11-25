@@ -1,0 +1,103 @@
+/* Simple beginner-level styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f2f2f2;
+    color: #222;
+}
+
+header {
+    background-color: #231041;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+nav {
+    background-color: #333;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    width: 85%;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+section, article, aside {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+h2 {
+    color: #24476b;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 95%;
+    max-width: 400px;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+fieldset {
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #24476b;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #18324d;
+}
+
+a:focus, input:focus, select:focus, textarea:focus, button:focus {
+    outline: 2px solid orange;
+    outline-offset: 2px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
+
+@media (max-width: 600px) {
+    main {
+        width: 94%;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}

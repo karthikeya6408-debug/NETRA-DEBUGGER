@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            /* 👆General flex means side by side araranges but flex direction column mean one by one down */
+            /* ⭐Without this flex direction column, the objects will appear all side by side */
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgb(149, 143, 188);
+            padding: 15px;
+            text-align: center;
+        }
+
+        footer{
+            background-color: rgb(149, 143, 188) ;
+            text-align: center;
+            margin: 0;
+            padding: 5px;
+        }
+
+        nav{
+            background-color: rgb(111, 66, 157);
+            padding: 10px;
+            display: flex;
+                gap: 10px;
+
+        }
+
+        a{
+            text-decoration: none;
+        }
+
+        main{
+            padding: 20px;
+            flex: 1;
+        }
+
+        section, aside, article{
+            background-color: rgb(111, 66, 157);
+            padding: 10px;
+            margin: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>KL University</h1>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main id="#home">
+        <section id="#courses">
+            <!-- For single related content we use section tag -->
+            <h2>Courses</h2>
+            <h5>CSE</h5>
+            <h5>ECE</h5>
+            <h5>EEE</h5>
+            <h5>CS & IT</h5>
+            <h5>AI & DS</h5>
+        </section>
+
+        <article>
+            <!-- For multiple related contents we use this article tag -->
+            <h2>Latest News</h2>
+            <h4>Admissions are open for 2027</h4>
+            <h5>PBL Approach introducced with Tri-Sem Pattern</h5>
+        </article>
+
+        <aside id="#contact">
+            <!-- For additional details, we use this aside tag -->
+            <h2>Upcoming Events</h2>
+            <h5>SURABHI Fest - Contact ***</h5>
+            <h5>DSA Hackathon - Contact ***</h5>
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 KL University</p>
+        <p>Mail: principal@kluniversity.in </p>
+    </footer>
+
+</body>
+
+</html>
