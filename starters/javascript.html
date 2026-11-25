@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=nka, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function callme() {
+            alert("Hello World");
+        }
+
+
+        function compare() {
+            var a = 30; b = 30;
+            if (a > b)
+                alert("a is grater");
+            else if (b > a)
+                alert("b is greater");
+            else
+                alert("a and b are equal");
+        }
+
+
+        function concatenate(a, b) {
+            alert(a + b);
+        }
+    </script>
+    <!-- This is the script in the head tag👆 -->
+
+</head>
+
+<body>
+
+
+    <script>
+        function add() {
+            var a = 10;
+            var b = 20; c = a + b;
+            // To create Variables 👆
+
+            alert(c);
+
+            document.write("The sum of a and b is " + c);
+            // To display in the web page itself 👆
+
+            console.log("the sum of a and b is: " + c);
+            // This is shown in the console area when we inspect t his web page👆 
+        }
+    </script>
+    <!-- We can define the functions in the script tag in the body too 👆 -->
+
+
+
+    <!-- Calling the function from the head and body sections👇 -->
+    <script>
+        callme();
+        add();
+        compare();
+        concatenate("Shaik ", "Aman");
+
+        alert("We have called all the fuctions defined by us");
+    </script>
+
+
+
+    <button onclick="callme()">Click Me</button>
+    <!-- 👆Here we are calling the callme() function which is under the script tag -->
+    <!-- Here, the action is triggered when the mouse button is released⭐ -->
+
+
+    <button ondblclick="alert('On double click')">On double click</button>
+    <!-- This appears when we double click on this button👆👆 -->
+
+
+    <button onmousedown="alert('On mouse down')">On mouse down</button>
+    <!-- This action takes place when we click on the button and not when releasing 👆 -->
+
+
+    <button onmouseup="alert('On mouse up')">On mouse up</button>
+    <!-- This action takes place when we click on the button and released 👆 -->
+
+
+    <button onmouseover="alert('On mouse over')">On mouse over</button>
+    <!-- this action takes place when we hover on the button👆 -->
+
+    
+    <button onmouseleave="alert('On mouse leave')">On mouse leave</button>
+    <!-- This action takes place when the pointer leaves the button👆 -->
+
+
+</body>
+
+</html>
+
+
+<!-- We can write the style codes in head and body tag both ⭐⭐ -->

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityCare Hospital | Patient Appointments</title>
+
+    <!-- Connect the CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header contains the hospital name and main navigation -->
+    <header class="site-header">
+        <div class="container">
+            <h1>CityCare Hospital</h1>
+            <p class="tagline">Quality healthcare for everyone</p>
+
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#doctors">Our Doctors</a></li>
+                    <li><a href="#appointment">Book Appointment</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main contains the primary content of this webpage -->
+    <main id="home" class="container">
+
+        <section class="welcome-section" aria-labelledby="welcome-heading">
+            <h2 id="welcome-heading">Welcome to CityCare Hospital</h2>
+            <p>
+                We provide patient-focused medical care with experienced doctors
+                and modern facilities. Book an appointment with our team today.
+            </p>
+        </section>
+
+        <section id="services" aria-labelledby="services-heading">
+            <h2 id="services-heading">Our Services</h2>
+
+            <div class="content-grid">
+                <article class="info-card">
+                    <h3>General Medicine</h3>
+                    <p>Medical consultations, health check-ups and preventive care.</p>
+                </article>
+
+                <article class="info-card">
+                    <h3>Cardiology</h3>
+                    <p>Consultations and care related to heart health.</p>
+                </article>
+
+                <article class="info-card">
+                    <h3>Orthopedics</h3>
+                    <p>Care for bones, joints and muscle-related conditions.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="doctors" aria-labelledby="doctors-heading">
+            <h2 id="doctors-heading">Meet Our Doctors</h2>
+
+            <div class="content-grid">
+                <article class="info-card">
+                    <h3>Dr. Ananya Rao</h3>
+                    <p>Specialization: General Medicine</p>
+                    <p>Experience: 8 years</p>
+                </article>
+
+                <article class="info-card">
+                    <h3>Dr. Rahul Mehta</h3>
+                    <p>Specialization: Cardiology</p>
+                    <p>Experience: 12 years</p>
+                </article>
+
+                <article class="info-card">
+                    <h3>Dr. Priya Sharma</h3>
+                    <p>Specialization: Orthopedics</p>
+                    <p>Experience: 10 years</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="appointment" aria-labelledby="appointment-heading">
+            <h2 id="appointment-heading">Patient Appointment Form</h2>
+            <p>Fields marked with <span aria-hidden="true">*</span> are required.</p>
+
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="patientName">Full Name <span aria-hidden="true">*</span></label>
+                    <input
+                        type="text"
+                        id="patientName"
+                        name="patientName"
+                        autocomplete="name"
+                        required
+                        minlength="2"
+                        placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientEmail">Email Address <span aria-hidden="true">*</span></label>
+                    <input
+                        type="email"
+                        id="patientEmail"
+                        name="patientEmail"
+                        autocomplete="email"
+                        required
+                        placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientPhone">Phone Number <span aria-hidden="true">*</span></label>
+                    <input
+                        type="tel"
+                        id="patientPhone"
+                        name="patientPhone"
+                        autocomplete="tel"
+                        required
+                        pattern="[0-9]{10}"
+                        title="Enter a 10-digit phone number"
+                        placeholder="10-digit phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Choose Department <span aria-hidden="true">*</span></label>
+                    <select id="department" name="department" required>
+                        <option value="">Select a department</option>
+                        <option value="General Medicine">General Medicine</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="appointmentDate">Preferred Appointment Date <span aria-hidden="true">*</span></label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Additional Message (optional)</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        placeholder="Enter any additional information"></textarea>
+                </div>
+
+                <button type="submit">Submit Appointment Request</button>
+
+                <!-- JavaScript writes the form result here -->
+                <p id="formMessage" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer contains contact and copyright information -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>CityCare Hospital | Contact: 9876543210</p>
+            <p>&copy; 2026 CityCare Hospital. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Connect the JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
