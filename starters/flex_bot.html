@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Flexbox Guide</title>
+
+    <style>
+
+        /* BASIC PAGE STYLING */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F1FA;
+            margin: 0;
+            padding: 25px;
+            color: #160B2E;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            color: #341D6C;
+            margin-top: 40px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* FLEX CONTAINER */
+
+        .container {
+            display: flex;
+
+            /* Main axis direction */
+            flex-direction: row;
+
+            /* Allows items to move to another line */
+            flex-wrap: wrap;
+
+            /* Space between flex items */
+            gap: 20px;
+
+            /* Alignment along the main axis */
+            justify-content: center;
+
+            /* Alignment along the cross axis */
+            align-items: center;
+
+            /* Alignment of multiple flex lines */
+            align-content: center;
+
+            background-color: #341D6C;
+            padding: 20px;
+            height: 300px;
+        }
+
+        /* FLEX ITEMS */
+
+        .item {
+            background-color: #C5A15B;
+            color: #160B2E;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+
+            /* Flex item properties */
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: auto;
+        }
+
+        /* FLEX DIRECTION EXAMPLES */
+
+        .row {
+            flex-direction: row;
+        }
+
+        .row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        .column {
+            flex-direction: column;
+        }
+
+        .column-reverse {
+            flex-direction: column-reverse;
+        }
+
+        /* FLEX WRAP EXAMPLES */
+
+        .wrap {
+            flex-wrap: wrap;
+        }
+
+        .nowrap {
+            flex-wrap: nowrap;
+        }
+
+        .wrap-reverse {
+            flex-wrap: wrap-reverse;
+        }
+
+        /* JUSTIFY CONTENT EXAMPLES */
+
+        .justify-start {
+            justify-content: flex-start;
+        }
+
+        .justify-end {
+            justify-content: flex-end;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-around {
+            justify-content: space-around;
+        }
+
+        .justify-evenly {
+            justify-content: space-evenly;
+        }
+
+        /* ALIGN ITEMS EXAMPLES */
+
+        .align-start {
+            align-items: flex-start;
+        }
+
+        .align-end {
+            align-items: flex-end;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
+        .align-stretch {
+            align-items: stretch;
+        }
+
+        .align-baseline {
+            align-items: baseline;
+        }
+
+        /* FLEX ITEM INDIVIDUAL ALIGNMENT */
+
+        .special {
+            align-self: flex-end;
+        }
+
+        /* FLEX GROW EXAMPLE */
+
+        .grow-item {
+            flex-grow: 1;
+        }
+
+        /* FLEX SHRINK EXAMPLE */
+
+        .shrink-item {
+            flex-shrink: 0;
+        }
+
+        /* FLEX BASIS EXAMPLE */
+
+        .basis-item {
+            flex-basis: 150px;
+        }
+
+        /* ORDER EXAMPLE */
+
+        .order-first {
+            order: -1;
+        }
+
+        .order-last {
+            order: 1;
+        }
+
+        /* COMMON SECTION STYLING */
+
+        .demo {
+            margin-bottom: 35px;
+        }
+
+        .demo .container {
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        .small-container {
+            height: 180px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Complete CSS Flexbox Guide</h1>
+
+    <p>
+        Flexbox is a CSS layout model used to arrange elements
+        in rows or columns and control their alignment,
+        spacing, and distribution.
+    </p>
+
+
+    <!-- 1. BASIC FLEXBOX -->
+
+    <div class="demo">
+
+        <h2>1. Basic Flexbox</h2>
+
+        <p>
+            display: flex activates Flexbox.
+            Its direct children become flex items.
+        </p>
+
+        <div class="container">
+
+            <div class="item">HTML & CSS</div>
+            <div class="item">JavaScript</div>
+            <div class="item">React</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 2. FLEX DIRECTION -->
+
+    <div class="demo">
+
+        <h2>2. Flex Direction</h2>
+
+        <p>
+            flex-direction controls the direction
+            in which flex items are arranged.
+        </p>
+
+        <h3>Row</h3>
+
+        <div class="container small-container row">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+        <h3>Row Reverse</h3>
+
+        <div class="container small-container row-reverse">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+        <h3>Column</h3>
+
+        <div class="container small-container column">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+        <h3>Column Reverse</h3>
+
+        <div class="container small-container column-reverse">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+    </div>
+
+
+    <!-- 3. FLEX WRAP -->
+
+    <div class="demo">
+
+        <h2>3. Flex Wrap</h2>
+
+        <p>
+            flex-wrap determines whether items remain
+            on one line or move onto multiple lines.
+        </p>
+
+        <h3>Wrap</h3>
+
+        <div class="container wrap">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+            <div class="item">React</div>
+            <div class="item">Python</div>
+            <div class="item">Java</div>
+        </div>
+
+        <h3>No Wrap</h3>
+
+        <div class="container nowrap">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+            <div class="item">React</div>
+        </div>
+
+        <h3>Wrap Reverse</h3>
+
+        <div class="container wrap-reverse">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+            <div class="item">React</div>
+        </div>
+
+    </div>
+
+
+    <!-- 4. JUSTIFY CONTENT -->
+
+    <div class="demo">
+
+        <h2>4. Justify Content</h2>
+
+        <p>
+            justify-content distributes items along
+            the main axis.
+        </p>
+
+        <h3>Flex Start</h3>
+
+        <div class="container justify-start small-container">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JS</div>
+        </div>
+
+        <h3>Flex End</h3>
+
+        <div class="container justify-end small-container">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JS</div>
+        </div>
+
+        <h3>Center</h3>
+
+        <div class="container justify-center small-container">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JS</div>
+        </div>
+
+        <h3>Space Between</h3>
+
+        <div class="container justify-between small-container">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JS</div>
+        </div>
+
+        <h3>Space Around</h3>
+
+        <div class="container justify-around small-container">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JS</div>
+        </div>
+
+        <h3>Space Evenly</h3>
+
+        <div class="container justify-evenly small-container">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JS</div>
+        </div>
+
+    </div>
+
+
+    <!-- 5. ALIGN ITEMS -->
+
+    <div class="demo">
+
+        <h2>5. Align Items</h2>
+
+        <p>
+            align-items controls the alignment of items
+            along the cross axis within a flex line.
+        </p>
+
+        <h3>Flex Start</h3>
+
+        <div class="container align-start">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+        <h3>Flex End</h3>
+
+        <div class="container align-end">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+        <h3>Center</h3>
+
+        <div class="container align-center">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+        <h3>Stretch</h3>
+
+        <div class="container align-stretch">
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+        </div>
+
+    </div>
+
+
+    <!-- 6. ALIGN CONTENT -->
+
+    <div class="demo">
+
+        <h2>6. Align Content</h2>
+
+        <p>
+            align-content controls the distribution of
+            multiple flex lines along the cross axis.
+            It is relevant when wrapping creates multiple lines.
+        </p>
+
+        <div class="container wrap"
+             style="align-content: space-between; height: 350px;">
+
+            <div class="item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+            <div class="item">React</div>
+            <div class="item">Python</div>
+            <div class="item">Java</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 7. ALIGN SELF -->
+
+    <div class="demo">
+
+        <h2>7. Align Self</h2>
+
+        <p>
+            align-self allows an individual flex item
+            to override the container's align-items value.
+        </p>
+
+        <div class="container">
+
+            <div class="item">HTML</div>
+
+            <div class="item special">
+                CSS - Align Self
+            </div>
+
+            <div class="item">JavaScript</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 8. FLEX GROW -->
+
+    <div class="demo">
+
+        <h2>8. Flex Grow</h2>
+
+        <p>
+            flex-grow determines how extra available
+            space is distributed among flex items.
+        </p>
+
+        <div class="container">
+
+            <div class="item grow-item">HTML</div>
+            <div class="item grow-item">CSS</div>
+            <div class="item">JavaScript</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 9. FLEX SHRINK -->
+
+    <div class="demo">
+
+        <h2>9. Flex Shrink</h2>
+
+        <p>
+            flex-shrink determines how items shrink
+            when there is insufficient space.
+        </p>
+
+        <div class="container nowrap">
+
+            <div class="item shrink-item">HTML</div>
+            <div class="item">CSS</div>
+            <div class="item">JavaScript</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 10. FLEX BASIS -->
+
+    <div class="demo">
+
+        <h2>10. Flex Basis</h2>
+
+        <p>
+            flex-basis defines the initial main size
+            of a flex item before free space is distributed.
+        </p>
+
+        <div class="container">
+
+            <div class="item basis-item">HTML</div>
+            <div class="item basis-item">CSS</div>
+            <div class="item basis-item">JavaScript</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 11. ORDER -->
+
+    <div class="demo">
+
+        <h2>11. Order</h2>
+
+        <p>
+            order controls the visual arrangement
+            of flex items.
+        </p>
+
+        <div class="container">
+
+            <div class="item">HTML</div>
+
+            <div class="item order-last">
+                CSS
+            </div>
+
+            <div class="item order-first">
+                JavaScript
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

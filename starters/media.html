@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>1)Normal Iamge</h2>
+    <img src="https://www.w3schools.com/html/img_chania.jpg" alt="Local colony" height="300" width="400" loading="lazy">
+    <!-- 👆⭐Loading lazy means the images load only when we scroll to that particular position or location -->
+
+
+    <h2>2)Responsive Images</h2>
+    <picture>
+        
+        <source media="(max-width: 1000px)" srcset="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800">
+        <!-- 👆👆This means that when the size of the screen is reduced to 1000px, this pic will be dispalyed -->
+
+        <img src="https://www.w3schools.com/html/img_chania.jpg" alt="Local colony" height="300" width="400"
+            loading="lazy">
+
+    </picture>
+
+    <h3>3)Audio</h3>
+    <audio src="https://www.w3schools.com/html/horse.mp3" controls loop preload="metadata">
+        <!-- controls attribut gives the controls for the sudio file in the webpage -->
+        <!-- loop Attribute helps to keep playing the audio once finished -->
+        <!-- preload="metadata" allows to load all the basic controls and info of the audio beforehand and doesn't download the audio automatically...
+         preload="auto" automatically downloads the video from the browser beforhand
+         preload="none" doesn't do anything-->
+    </audio>
+
+    <h3>4)Video</h3>
+    <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" width="400" height="300" controls preload="auto"></video>
+
+</body>
+
+</html>

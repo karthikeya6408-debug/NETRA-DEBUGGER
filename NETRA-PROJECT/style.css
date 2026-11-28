@@ -130,3 +130,40 @@ nav a.active {/*this is for the active state of the links in the navigation bar 
     color:aliceblue
     
 }
+
+.page{
+    padding: 30px 5%;
+    
+}
+.page p{
+    color:burlywood;
+}
+.kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:30px;
+}
+.kpi-card{
+    background:#150f2a;
+    border:1px solid #49365C;
+    border-radius:12px;
+    padding:22px;
+    transition:0.2;
+
+}
+.kpi-card:hover{
+    border-color:bisque;
+    transform:translateY(-3px);
+     background:
+        radial-gradient(
+            circle at top left,
+            rgba(166, 112, 255, 0.20),
+            transparent 75%
+        ),
+        #150f2a;
+
+    box-shadow:
+        0 0 20px rgba(166, 112, 255, 0.12),
+        0 8px 25px rgba(0, 0, 0, 0.25);
+}
